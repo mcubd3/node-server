@@ -43,11 +43,20 @@ app.post('/',async (req, res) => {
 var d=await new collec({
   name:req.headers.reqs,
   date:moment().tz('Asia/dhaka').format('h:m a, D/M/YY'),
-  ip:12
+  ip:req.headers.ipp
 }).save()
 
   res.send(d) 
 })
+
+
+
+
+app.get('/',async (req, res) => {
+  collec.find()
+  
+    res.send(collec.find()) 
+  })
 
 
 
