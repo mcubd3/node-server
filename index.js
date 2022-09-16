@@ -14,7 +14,7 @@ import bodyParser from 'body-parser'
 var __dirname = dirname(fileURLToPath(import.meta.url));
 var DB='mongodb+srv://zayn:1221@cluster0.fzxdoyt.mongodb.net/db1?retryWrites=true&w=majority';mongoose.connect(DB)
 .then(() => {console.log('con suc')}).catch((err) => {console.log(err)})
-var schema=new mongoose.Schema({name:String,date:String,ipad:String})
+var schema=new mongoose.Schema({namer:String,date:String,ipad:String})
 var collec=new mongoose.model('za',schema)
 
 
@@ -41,9 +41,9 @@ httpServer.listen(process.env.PORT || 8000);
 
 app.post('/',async (req, res) => {
 var d=await new collec({
-  name:req.headers.reqs,
+  namer:req.headers.reqs,
   date:moment().tz('Asia/dhaka').format('h:m a, D/M/YY'),
-  ipad:  req.headers.reqs
+  ipad:req.headers.reqs
 }).save()
 
   res.send(d) 
