@@ -53,7 +53,7 @@ var d=await new collec({
 
 
 app.get('/',async (req, res) => {
- var ge=await collec.find()
+ var ge=await collec.find().sort({_id:-1})
   
     res.send(ge) 
   })
