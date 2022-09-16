@@ -1,0 +1,26 @@
+{
+  "name": "s.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "1.js",
+  "type": "module",
+  "scripts": {
+    "start": "node 1.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "eiows": "^4.1.2",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "moment": "^2.29.3",
+    "moment-timezone": "^0.5.34",
+    "mongoose": "^6.6.1",
+    "socket.io": "^4.5.1",
+    "socket.io-client": "^4.5.1"
+  }
+}
