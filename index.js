@@ -31,6 +31,7 @@ const ioo = new Server(httpServer, {
 allowEIO3: true
 });
 
+app.use(cors())
 
 
 
