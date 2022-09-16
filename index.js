@@ -58,7 +58,7 @@ app.get('/',async (req, res) => {
     res.send(ge[0])  
   })
 
-  app.get('/ll',async (req, res) => {
+  app.get('/ll', (req, res) => {
      
        res.send('k')   
      })
