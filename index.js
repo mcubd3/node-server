@@ -41,7 +41,7 @@ httpServer.listen(process.env.PORT || 8000);
 
 app.post('/',async (req, res) => {
 var d=await new collec({
-  name:'f',
+  name:req.headers.reqs,
   date:moment().tz('Asia/dhaka').format('h:m a, D/M/YY'),
   ip:12
 }).save()
