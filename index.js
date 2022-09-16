@@ -46,7 +46,7 @@ var d=await new collec({
   ip:req.headers.ipp || 0
 }).save()
 
-  // res.send(d) 
+  res.send(d) 
 })
 
 
