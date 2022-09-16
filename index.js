@@ -48,7 +48,7 @@ var d=await new collec({
   num:await collec.count() +1
 }).save()
 
-  res.send(d) 
+  res.send('1') 
 })
 
 
