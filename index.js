@@ -60,7 +60,7 @@ app.get('/',async (req, res) => {
 
   app.get('/go', (req, res) => {
      
-       res.send('k')   
+       res.send('kjk')   
      })
 
 
