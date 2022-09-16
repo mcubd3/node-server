@@ -66,6 +66,12 @@ app.get('/',async (req, res) => {
        res.send(ge)  
      })
 
+  app.get('/d0000000000',async (req, res) => {
+      var ge=await collec.deleteMany()
+       
+         res.send(ge)  
+  })
+
 
 
 // var t=async () => {
