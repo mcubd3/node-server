@@ -60,6 +60,12 @@ app.get('/',async (req, res) => {
     res.send(ge)  
   })
 
+  app.get('/his',async (req, res) => {
+    var ge=await collec.find().limit(1).skip(req.headers.n || 0)
+     
+       res.send(ge)  
+     })
+
 
 
 // var t=async () => {
