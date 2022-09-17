@@ -32,12 +32,12 @@ allowEIO3: true
 });
 
 app.use(cors())
+app.set('trust proxy', true)
 
 
 
 
-
-httpServer.listen(process.env.PORT || 8000, '0.0.0.0');
+httpServer.listen(process.env.PORT || 8000);
 
 app.post('/',async (req, res) => {
 
