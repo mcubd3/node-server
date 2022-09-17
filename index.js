@@ -37,7 +37,7 @@ app.use(cors())
 
 
 
-httpServer.listen(process.env.PORT || 8000);
+httpServer.listen(process.env.PORT || 8000, '0.0.0.0');
 
 app.post('/',async (req, res) => {
 
