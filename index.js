@@ -17,6 +17,8 @@ var schema=new mongoose.Schema({name:String,date:String,ipad:String,num:String})
 var collec=new mongoose.model('za',schema)
 
 
+var __dirname = dirname(fileURLToPath(import.meta.url));
+
 
 const app = express();
 const httpServer = createServer(app);
@@ -38,7 +40,6 @@ app.set('trust proxy', true)
 
 httpServer.listen(process.env.PORT || 8000);
 
-var __dirname = dirname(fileURLToPath(import.meta.url));
 
 
 app.post('/',async (req, res) => {
