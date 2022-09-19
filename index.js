@@ -76,8 +76,11 @@ app.get('/',async (req, res) => {
   })
 
 
+  const image = await loadImage(fs.readFileSync(__dirname 
+    + 'log.png'));
+
   app.get('/log',async (req, res) => {
-       res.sendFile(__dirname+'log.png')  
+       res.sendFile(image)  
 
       //  var dd=await new collec({
       //   name:'logo express',
