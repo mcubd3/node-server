@@ -50,7 +50,7 @@ var d=await new collec({
   date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY'),
   ipad:req.ip,
   num:await collec.count() +1,
-  browserr:req.bro || 'nope'
+  browserr:req.bro
 }).save()
 
   res.send('1') 
