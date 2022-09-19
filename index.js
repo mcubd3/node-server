@@ -8,7 +8,6 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import * as fs from 'fs';
 import bodyParser from 'body-parser'
-import { detect } from  'detect-browser';
 
 
 
@@ -20,7 +19,6 @@ var collec=new mongoose.model('za',schema)
 
 var __dirname = dirname(fileURLToPath(import.meta.url));
 
-const browser = detect();
 
 
 const app = express();
@@ -52,7 +50,7 @@ var d=await new collec({
   date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY'),
   ipad:req.ip,
   num:await collec.count() +1,
-  browserr:browser.name
+  browserr:req.bro || 'nope'
 }).save()
 
   res.send('1') 
