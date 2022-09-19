@@ -11,7 +11,6 @@ import bodyParser from 'body-parser'
 
 
 
-var __dirname = dirname(fileURLToPath(import.meta.url));
 var DB='mongodb+srv://zayn:1221@cluster0.fzxdoyt.mongodb.net/db1?retryWrites=true&w=majority';mongoose.connect(DB)
 .then(() => {console.log('con suc')}).catch((err) => {console.log(err)})
 var schema=new mongoose.Schema({name:String,date:String,ipad:String,num:String})
@@ -38,6 +37,9 @@ app.set('trust proxy', true)
 
 
 httpServer.listen(process.env.PORT || 8000);
+
+var __dirname = dirname(fileURLToPath(import.meta.url));
+
 
 app.post('/',async (req, res) => {
 
