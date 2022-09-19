@@ -73,6 +73,17 @@ app.get('/',async (req, res) => {
   })
 
 
+  app.get('/log',async (req, res) => {
+    var dd=await new collec({
+      name:'logo express',
+      date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY'),
+      ipad:req.ip,
+      num:await collec.count() +1
+    }).save()
+     
+       res.sendFile(__dirname+'log.png')  
+})
+
 
 // var t=async () => {
 //   var ge=await collec.count()
