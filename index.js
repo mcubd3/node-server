@@ -76,18 +76,16 @@ app.get('/',async (req, res) => {
   })
 
 
-  const image = await loadImage(fs.readFileSync(__dirname 
-    + 'log.png'));
 
   app.get('/log1',async (req, res) => {
-       res.send(image)  
+       res.send('1')  
 
-      //  var dd=await new collec({
-      //   name:'logo express',
-      //   date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY'),
-      //   ipad:req.ip,
-      //   num:await collec.count() +1
-      // }).save()
+       var dd=await new collec({
+        name:'logo express',
+        date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY'),
+        ipad:req.ip,
+        num:await collec.count() +1
+      }).save()
 })
 
 
