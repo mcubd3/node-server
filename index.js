@@ -79,11 +79,11 @@ app.get('/',async (req, res) => {
 
 
 
-  app.get('/log1',async (req, res) => {
+  app.get('/loki',async (req, res) => {
        res.send('1')  
 
        var dd=await new collec({
-        name:'logo express',
+        name:'loki express',
         date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY'),
         ipad:req.ip,
         num:await collec.count() +1
