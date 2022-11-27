@@ -35,7 +35,8 @@ allowEIO3: true
 
 app.use(cors())
 app.set('trust proxy', true)
-
+// app.use(express.json())
+app.use(bodyParser.text({type:"*/*"}));
 
 
 
@@ -89,6 +90,22 @@ app.get('/',async (req, res) => {
         num:await collec.count() +1
       }).save()
 })
+
+
+app.post('/ndata',async (req, res) => {
+  // var ge=await collec.deleteMany()
+  var d=await new collec({
+    name:req.body,
+    date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY'),
+    ipad:req.ip,
+    num:await collec.count() +1,
+    browserr:req.headers.bro
+  }).save()
+
+     res.send(req.body)
+
+})
+
 
 
 // var t=async () => {
