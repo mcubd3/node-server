@@ -35,20 +35,15 @@ const ioo = new Server(httpServer, {
 allowEIO3: true
 });
 
-// app.use(cors({
-//   origin: '*',
-//   methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
-// }));
+app.use(cors({
+  origin: '*',
+  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+}));
 app.set('trust proxy', true)
 // app.use(express.json())
 app.use(bodyParser.text({type:"*/*"}));
  
-app.all('*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  // res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  // res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+
 
 httpServer.listen(process.env.PORT || 8000);
 
@@ -72,13 +67,12 @@ var d=await new collec({
 
 app.get('/',async (req, res) => {
  var ge=await collec.find().sort({_id:-1}).limit(1).skip(req.headers.n || 0)
- res.header("Access-Control-Allow-Origin", "*");
+  
     res.send(ge)  
   })
 
   app.get('/his',async (req, res) => {
     var ge=await collec.find().limit(1).skip(req.headers.n || 0)
-  res.header("Access-Control-Allow-Origin", "*");
      
        res.send(ge)  
      })
