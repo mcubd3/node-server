@@ -42,7 +42,7 @@ app.use(cors({
 app.set('trust proxy', true)
 // app.use(express.json())
 app.use(bodyParser.text({type:"*/*"}));
-
+ 
 
 
 httpServer.listen(process.env.PORT || 8000);
