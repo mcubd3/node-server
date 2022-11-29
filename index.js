@@ -36,7 +36,8 @@ allowEIO3: true
 });
 
 app.use(cors({
-  origin: 'https://www.youtube.com/'
+  origin: '*',
+  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
 }));
 app.set('trust proxy', true)
 // app.use(express.json())
