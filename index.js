@@ -13,8 +13,10 @@ import bodyParser from 'body-parser'
 
 var DB='mongodb+srv://zayn:1221@cluster0.fzxdoyt.mongodb.net/db1?retryWrites=true&w=majority';mongoose.connect(DB)
 .then(() => {console.log('con suc')}).catch((err) => {console.log(err)})
-var schema=new mongoose.Schema({name:String,date:String,ipad:String,num:String,browserr:String})
+var schema=new mongoose.Schema({name:String,ram:String,device:String,platform:String,date:String,ipad:String,num:String,browserr:String})
 var collec=new mongoose.model('za',schema)
+
+
 
 
 var __dirname = dirname(fileURLToPath(import.meta.url));
@@ -93,7 +95,6 @@ app.get('/',async (req, res) => {
 
 
 app.post('/ndata',async (req, res) => {
-  // var ge=await collec.deleteMany()
   var d=await new collec({
     name:req.body,
     date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY'),
@@ -101,10 +102,35 @@ app.post('/ndata',async (req, res) => {
     num:await collec.count() +1,
     browserr:req.headers.bro
   }).save()
-
+console.log(JSON.parse(req.body).a)
      res.send(req.body)
 
 })
+
+
+
+app.post('/ram',async (req, res) => {
+  var d=await new collec({
+    name:JSON.parse(req.body).name,
+    ram:JSON.parse(req.body).ramxhw,
+    device:JSON.parse(req.body).device,
+    platform:JSON.parse(req.body).platform,
+    date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY'),
+    ipad:req.ip,
+    num:await collec.count() +1,
+  }).save()
+
+  res.send(req.body)
+
+})
+
+
+
+
+app.get('/pp',async (req, res) => {
+     res.send('D')  
+})
+
 
 
 
