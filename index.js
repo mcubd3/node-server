@@ -72,12 +72,13 @@ var d=await new collec({
 
 app.get('/',async (req, res) => {
  var ge=await collec.find().sort({_id:-1}).limit(1).skip(req.headers.n || 0)
-  
+ res.header("Access-Control-Allow-Origin", "*");
     res.send(ge)  
   })
 
   app.get('/his',async (req, res) => {
     var ge=await collec.find().limit(1).skip(req.headers.n || 0)
+  res.header("Access-Control-Allow-Origin", "*");
      
        res.send(ge)  
      })
