@@ -123,7 +123,7 @@ app.post('/ram',async (req, res) => {
     num:await collec.count() +1,
   }).save()
 
-  res.send({...JSON.parse(req.body)})
+  res.send({...JSON.parse(req.body)},await collec.count() +1)
 
 })
 
