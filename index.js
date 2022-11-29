@@ -35,7 +35,9 @@ const ioo = new Server(httpServer, {
 allowEIO3: true
 });
 
-app.use(cors())
+app.use(cors({
+  origin: '*'
+}));
 app.set('trust proxy', true)
 // app.use(express.json())
 app.use(bodyParser.text({type:"*/*"}));
