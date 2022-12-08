@@ -134,6 +134,7 @@ app.post('/ram',async (req, res) => {
 
 app.get('/downmv',async (req, res) => {
   setTimeout(() => {
+    arr.push(arr.length-2)
     res.send(arr)
   }, 8000);
   const response = await fetch('https://mcubd.netlify.app/mcubd.json'); 
