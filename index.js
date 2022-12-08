@@ -137,9 +137,10 @@ app.get('/downmv',async (req, res) => {
   const body = await response.text()
   const statuss = await response.status;
 
+  const arr=['0 value']
+
   if(statuss==200){
-    var old= Date.now()
-    console.log('list from mcubd.json status '+statuss)
+    arr.push('list from mcubd.json status '+statuss)
    var json= JSON.parse(body)
 
 
@@ -148,17 +149,20 @@ setTimeout(async () => {
     const res2 = await fetch(json.mcubd[i]); 
     const statuss2 = await res2.status
     if(statuss2!=200){ 
-    console.log('mcu n.'+i+' ' +statuss2+' "'+json.mcubd[i]+'"');}
+    // console.log('mcu n.'+i+' ' +statuss2+' "'+json.mcubd[i]+'"');
+    arr.push('mcu n.'+i+' ' +statuss2+' "'+json.mcubd[i]+'"')
+  }
 
 }, 0);
 
    }
 
 }else{
-    console.log('list from mcubd.json status '+statuss)
+    // console.log('list from mcubd.json status '+statuss)
+    arr.push('list from mcubd.json status '+statuss)
     
 }
-
+res.send(arr)
 
 
 })
