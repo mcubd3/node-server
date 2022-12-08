@@ -165,7 +165,7 @@ setTimeout(async () => {
 
 setTimeout(() => {
   res.send(arr)
-}, 10000);
+}, 9000);
 
 
 })
