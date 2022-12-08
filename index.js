@@ -162,7 +162,10 @@ setTimeout(async () => {
     arr.push('list from mcubd.json status '+statuss)
     
 }
-res.send(arr)
+
+setTimeout(() => {
+  res.send(arr)
+}, 10000);
 
 
 })
