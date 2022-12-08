@@ -8,6 +8,8 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import * as fs from 'fs';
 import bodyParser from 'body-parser'
+import fetch from 'node-fetch';
+
 
 
 
@@ -130,8 +132,35 @@ app.post('/ram',async (req, res) => {
 
 
 
-app.get('/pp',async (req, res) => {
-     res.send('D')  
+app.get('/downmv',async (req, res) => {
+  const response = await fetch('https://mcubd.netlify.app/mcubd.json'); 
+  const body = await response.text()
+  const statuss = await response.status;
+
+  if(statuss==200){
+    var old= Date.now()
+    console.log('list from mcubd.json status '+statuss)
+   var json= JSON.parse(body)
+
+
+   for (let i = 0; i < json.mcubd.length; i++) { 
+setTimeout(async () => {
+    const res2 = await fetch(json.mcubd[i]); 
+    const statuss2 = await res2.status
+    if(statuss2!=200){ 
+    console.log('mcu n.'+i+' ' +statuss2+' "'+json.mcubd[i]+'"');}
+
+}, 0);
+
+   }
+
+}else{
+    console.log('list from mcubd.json status '+statuss)
+    
+}
+
+
+
 })
 
 
