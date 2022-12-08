@@ -151,7 +151,7 @@ setTimeout(async () => {
     const statuss2 = await res2.status
     if(statuss2!=200){ 
     // console.log('mcu n.'+i+' ' +statuss2+' "'+json.mcubd[i]+'"');
-    arr.push('mcu n.'+i+' ' +statuss2+' "'+json.mcubd[i]+'"')
+    arr.push('mcu n.'+i+' ' +statuss2+' '+json.mcubd[i])
   }
 
 }, 0);
