@@ -139,11 +139,32 @@ app.get('/downmv',async (req, res) => {
   const statuss = await response.status
   
   if(statuss==200){
-     var json= JSON.parse(body)
+     let json= JSON.parse(body)
+
+     let arr=[]
+
+     json.mcubd.forEach(item => {
+         arr.push(fetch(item).then((res)=>{ return {status:res.status,url:item,section:'MCU'}}))
+     });
+     
+     json.seris.forEach(item => {
+         arr.push(fetch(item).then((res)=>{ return {status:res.status,url:item,section:'Seris'}}))
+     });
+     
+     json.fox.forEach(item => {
+         arr.push(fetch(item).then((res)=>{ return {status:res.status,url:item,section:'Fox'}}))
+     });
+     
+    //  json.others.forEach(item => {
+    //      arr.push(fetch(item).then((res)=>{ return {status:res.status,url:item,section:'Others'}}))
+    //  });
+     
+    //  Promise.all(arr).then((data)=>console.table(data))
+    Promise.all(arr).then((data)=>res.send(data))
+
+     
 
 
-
-     res.send(json)
 
     }else{res.send('mcubd.json status not 200')}
 })
