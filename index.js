@@ -155,9 +155,9 @@ app.get('/downmv',async (req, res) => {
          arr.push(fetch(item).then((res)=>{ return {status:res.status,url:item,section:'Fox'}}))
      });
      
-    //  json.others.forEach(item => {
-    //      arr.push(fetch(item).then((res)=>{ return {status:res.status,url:item,section:'Others'}}))
-    //  });
+     json.others.forEach(item => {
+         arr.push(fetch(item).then((res)=>{ return {status:res.status,url:item,section:'Others'}}))
+     });
      
     //  Promise.all(arr).then((data)=>console.table(data))
     Promise.all(arr).then((data)=>res.send(data))
