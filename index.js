@@ -133,40 +133,19 @@ app.post('/ram',async (req, res) => {
 
 
 app.get('/downmv',async (req, res) => {
-  setTimeout(() => {arr.push(arr.length-2);res.send(arr)}, 8000);
+  
   const response = await fetch('https://mcubd.netlify.app/mcubd.json'); 
   const body = await response.text()
-  const statuss = await response.status;
-
-  const arr=['0 value']
-
+  const statuss = await response.status
+  
   if(statuss==200){
-    arr.push('list from mcubd.json status '+statuss)
-   var json= JSON.parse(body)
-
-
-   for (let i = 0; i < json.mcubd.length; i++) { 
-setTimeout(async () => {
-    const res2 = await fetch(json.mcubd[i]); 
-    const statuss2 = await res2.status
-    if(statuss2!=200){ 
-    // console.log('mcu n.'+i+' ' +statuss2+' "'+json.mcubd[i]+'"');
-    arr.push('mcu n.'+i+' ' +statuss2+' '+json.mcubd[i])
-  }
-
-}, 0);
-
-   }
-
-}else{
-    // console.log('list from mcubd.json status '+statuss)
-    arr.push('list from mcubd.json status '+statuss)
-    
-}
+     var json= JSON.parse(body)
 
 
 
+     res.send(json)
 
+    }else{res.send('mcubd.json status not 200')}
 })
 
 
