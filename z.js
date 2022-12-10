@@ -1,4 +1,4 @@
-self.addEventListener("install",function (e){
+
     navigator.serviceWorker.ready.then(registration => {
         if (registration.sync) {
             console.log('// Background Sync is supported.')
@@ -9,4 +9,3 @@ self.addEventListener("install",function (e){
         }
     });
 
-})
