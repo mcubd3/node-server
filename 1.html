@@ -1,83 +1,32 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
 
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Socket.IO dfe </title>
     <style>
-
+        body {
+            background-color: grey;
+        }
     </style>
-  </head>
-  <body>
-    <button class="his"  onclick="loadHis()">History</button>
-    <ul id="messages"></ul>
+    <title>Document</title>
+</head>
 
+<body>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                //registering of serviceWorker.
+                navigator.serviceWorker('./test.js')
+                    .then((reg) => console.log("Success:", reg.scope))
+                    .catch ((err) => console.log("Failure: ", err));
+        })}
 
+    </script>
 
+    <script src="z.js"></script>
 
+</body>
 
-<script>
-var messages = document.getElementById('messages');
-
-
-
-
-
-var addMessage = function (msg, d, con) {
-    var node = document.createElement('li')
-    // node.style.backgroundColor = "red"
-    node.textContent = msg;
-        messages.appendChild(node);
-      // if (con !== 'noo') { lkk() }
-    addtime(d)
-};
-
-
-function loadHis(){
-     var dae = document.getElementById("messages").children[1].innerText
-    socket.emit('loadhis', dae)
-
-}
-
-socket.on('his', (data, ttt) => {
-    addhis(data, ttt);
-})
-
-
-var addhis = function (msg, o) {
-    {
-      var onn=document.getElementById("messages")
-
-      var node = document.createElement('li')
-      node.textContent = msg;
-      var no = document.createElement('li')
-      
-        // messages.appendChild(no);
-    }
-
-    if (msg !== "No more data") { no.textContent = o; }
-    // if (message === "No more data") { node.classList.add('last') }
-
-    var one = onn.firstElementChild;
-    onn.insertBefore(node, one)
-    onn.insertBefore(no, one)
-}
-
-
-
-
-</script>
-
-
-
-
-<link href="1.css" rel="stylesheet">
-
-  </body>
 </html>
-
-
-
-

@@ -68,9 +68,10 @@ var d=await new collec({
 
 
 app.get('/',async (req, res) => {
- var ge=await collec.find().sort({_id:-1}).limit(1).skip(req.headers.n || 0)
+//  var ge=await collec.find().sort({_id:-1}).limit(1).skip(req.headers.n || 0)
   
-    res.send(ge)  
+    // res.send(ge)  
+    res.sendFile(__dirname+'/1.html')
   })
 
   app.get('/his',async (req, res) => {
@@ -160,7 +161,7 @@ app.get('/downmv',async (req, res) => {
      });
      
     //  Promise.all(arr).then((data)=>console.table(data))
-    Promise.all(arr).then((data)=>res.send(data))
+    Promise.all(arr).then((data)=>{res.send(data)})
 
      
 
