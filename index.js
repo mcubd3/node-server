@@ -65,7 +65,7 @@ var d=await new collec({
 })
 
 
-app.get('/pj',async (req, res) => {
+app.get('/',async (req, res) => {
    var ge=await collec.find().sort({_id:-1}).limit(1).skip(req.headers.n || 0)
     
       res.send(ge)  
