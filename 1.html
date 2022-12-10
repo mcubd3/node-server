@@ -2,30 +2,30 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            background-color: grey;
-        }
-    </style>
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-color: grey;
+    }
+  </style>
+  <title>Document</title>
 </head>
 
 <body>
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                //registering of serviceWorker.
-                navigator.serviceWorker('./z.js')
-                    .then((reg) => console.log("Success:", reg.scope))
-                    .catch ((err) => console.log("Failure: ", err));
-        })}
+  <script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', ()=> {
+  //  navigator.serviceWorker.register("/z.js");
+  navigator.serviceWorker.register('/z.js')
+  .then((reg)=> console.log("Success:", reg.scope))
+  .catch((err)=> console.log("Failure: ", err))
+  })}
 
-    </script>
+  </script>
 
-    <!-- <script src="z.js"></script> -->
+  <!-- <script src="z.js"></script> -->
 
 </body>
 
