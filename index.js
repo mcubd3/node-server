@@ -77,6 +77,8 @@ app.get('/',async (req, res) => {
         res.sendFile(__dirname+'/z.js')
       })
 
+      
+
   app.get('/his',async (req, res) => {
     var ge=await collec.find().limit(1).skip(req.headers.n || 0)
      

@@ -18,14 +18,14 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 //registering of serviceWorker.
-                navigator.serviceWorker('./test.js')
+                navigator.serviceWorker('./z.js')
                     .then((reg) => console.log("Success:", reg.scope))
                     .catch ((err) => console.log("Failure: ", err));
         })}
 
     </script>
 
-    <script src="z.js"></script>
+    <!-- <script src="z.js"></script> -->
 
 </body>
 
