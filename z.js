@@ -21,7 +21,7 @@ function doo (){
   var count=0
   count=count+1
   console.log(count)
-  fetch('http://localhost:8000/pj', {
+  fetch('https://nodebd.vercel.app/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
