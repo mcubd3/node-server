@@ -105,7 +105,7 @@ app.get('/',async (req, res) => {
 
 app.get('/pj',async (req, res) => {
 
-    res.sendFile(__dirname+'/1.html')
+    res.sendFile(__dirname+'sevice-worker.html')
   })
 
 
