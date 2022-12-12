@@ -13,33 +13,35 @@
 
 <body>
 
-  <script>
-    if('serviceWorker' in navigator){
-    window.addEventListener('load', ()=> {
-      //registering of serviceWorker.
-    navigator.serviceWorker.register('z.js')
-    .then((reg)=> console.log("Success:", reg.scope))
-    .catch((err)=> console.log("Failure: ", err))
-    })}
-
-
-setTimeout(() => {
-  navigator.serviceWorker.ready.then(
-  function (swReg){
-    // return swReg.sync.register('foo')
-    return swReg.periodicSync.register('foo', {
-      minInterval: 2000,
-    })
-
-  }
-)
-
-
-}, 2000);
 
 
 
-   </script>
+<script type="module">
+
+
+
+
+
+  if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=> {
+    //registering of serviceWorker.
+  navigator.serviceWorker.register('z.js',{type: 'module'})
+  .then((reg)=> console.log("Success:", reg.scope))
+  .catch((err)=> console.log("Failure: ", err))
+  })}
+
+
+
+ 
+
+// const msg=firebase.messaging();
+// msg.requestPermission().then(()=>{
+// return msg.getToken()
+// }).then((data) => {
+// console.log('token',data)
+// })
+
+ </script>
 
 
 
