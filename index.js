@@ -9,6 +9,11 @@ import { fileURLToPath } from 'url';
 import * as fs from 'fs';
 import bodyParser from 'body-parser'
 import fetch from 'node-fetch';
+import multer  from 'multer'
+import path  from 'path'
+
+
+
 
 
 
@@ -43,11 +48,33 @@ app.use(cors({
 }));
 app.set('trust proxy', true)
 // app.use(express.json())
-app.use(bodyParser.text({type:"*/*"}));
+
+// app.use(bodyParser.json({
+//   limit: '50mb'
+// }));
+app.use(bodyParser.text({type:"*/*",limit:'50mb'}));
  
 
 
 httpServer.listen(process.env.PORT || 8000);
+
+
+
+
+const storage=multer.diskStorage({
+  destination:(req,file,cb)=>{
+    cb(null,'images')
+  },
+  filename:(req,file,cb)=>{
+    console.log(file)
+    cb(null,Date.now() + path.extname(file.originalname) )
+  }
+})
+
+const upload=multer({storage:storage})
+
+
+
 
 
 
@@ -71,12 +98,34 @@ app.get('/',async (req, res) => {
       res.send(ge)  
     })
 
+
+
+
+    
+
 app.get('/pj',async (req, res) => {
-//  var ge=await collec.find().sort({_id:-1}).limit(1).skip(req.headers.n || 0)
-  
-    // res.send(ge)  
+
     res.sendFile(__dirname+'/1.html')
   })
+
+
+
+  app.post('/pj',upload.single('imges') , (req, res) => {
+
+ console.log(req.body) 
+
+
+ 
+
+    res.send('ok')  
+  }) 
+ 
+
+
+
+
+
+
   app.get('/z.js',async (req, res) => {
         res.sendFile(__dirname+'/z.js')
       })
