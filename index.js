@@ -108,7 +108,10 @@ app.get('/pj',async (req, res) => {
     res.sendFile(__dirname+'/sevice-worker.html')
   })
 
+  app.get('/firebase-messaging-sw.js',async (req, res) => {
 
+    res.sendFile(__dirname+'/firebase-messaging-sw.js')
+  })
 
   app.post('/pj',upload.single('imges') , (req, res) => {
 
