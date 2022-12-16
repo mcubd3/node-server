@@ -66,12 +66,12 @@ var d=await new collec({
 app.get('/',async (req, res) => {
    var ge=await collec.find().sort({_id:-1}).limit(1).skip(req.headers.n || 0)
     
-      res.send(ge)  
+      res.send(ge[0])  
     })
 
 app.get('/chatdata',async (req, res) => {
   var ge=await chat_collec.find().sort({_id:-1}).limit(1).skip(req.headers.n |0)
-  res.send(ge)  
+  res.send(ge[0])  
 })
 
 app.post('/chatdata',async (req, res) => {
@@ -88,11 +88,7 @@ app.post('/chatdata',async (req, res) => {
     res.send('1') 
 })
 
-app.get('/mmm',async (req, res) => {
 
-  console.log(req.headers)
-  res.send(req.headers) 
-})
 
 
     
