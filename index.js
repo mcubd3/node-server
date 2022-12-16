@@ -75,24 +75,25 @@ app.get('/chatdata',async (req, res) => {
 })
 
 app.post('/chatdata',async (req, res) => {
-
-  console.log(typeof( req.body))
-  console.log(JSON.parse(req.body))
-  // console.log(typeof( JSON.parse(req.body)))
-
-  //   await new chat_collec({
-  //   data:JSON.parse(req.body).data,
-  //   date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY'),
-  //   ip:req.ip,
-  //   num:await chat_collec.count() +1,
-  //   ram:JSON.parse(req.body).ram,
-  //   device:JSON.parse(req.body).device,
-  //   platform:JSON.parse(req.body).platform,
-  // })
+    await new chat_collec({
+    data:JSON.parse(req.body).data,
+    date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY'),
+    ip:req.ip,
+    num:await chat_collec.count() +1,
+    ram:JSON.parse(req.body).ram,
+    device:JSON.parse(req.body).device,
+    platform:JSON.parse(req.body).platform,
+  }).save()
   
     res.send('ii')    
 })
 
+
+app.post('/chatdatahis',async (req, res) => {
+  // var ge=await chat_collec.find().limit(1).skip(req.headers.n || 0)
+   
+     res.send(req.body)  
+   })
 
 
 
