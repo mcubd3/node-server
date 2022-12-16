@@ -75,11 +75,12 @@ app.get('/chatdata',async (req, res) => {
 })
 
 app.post('/chatdata',async (req, res) => {
+  var number=await chat_collec.count()
     await new chat_collec({
     data:JSON.parse(req.body).data,
     date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY'),
     ip:req.ip,
-    num:await chat_collec.count() +1,
+    num:number +1,
     ram:JSON.parse(req.body).ram,
     device:JSON.parse(req.body).device,
     platform:JSON.parse(req.body).platform,
