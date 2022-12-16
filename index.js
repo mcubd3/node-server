@@ -90,7 +90,7 @@ app.post('/chatdata',async (req, res) => {
 
 
 app.post('/chatdatahis',async (req, res) => {
-  var ge=await chat_collec.find().limit(1).skip(req.body || 0)
+  var ge=await chat_collec.find().limit(1).skip(0)
    
      res.send(ge)  
    })
