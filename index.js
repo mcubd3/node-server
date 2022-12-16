@@ -23,25 +23,15 @@ var DB='mongodb+srv://zayn:1221@cluster0.fzxdoyt.mongodb.net/db1?retryWrites=tru
 var schema=new mongoose.Schema({name:String,ram:String,device:String,platform:String,date:String,ipad:String,num:String,browserr:String})
 var collec=new mongoose.model('za',schema)
 
+var chat_schema=new mongoose.Schema({name:String,ram:String,device:String,platform:String,date:String,ipad:String,num:String,browserr:String})
+var chat_collec=new mongoose.model('chat_data',chat_schema)
+
 
 
 
 var __dirname = dirname(fileURLToPath(import.meta.url));
-
-
-
 const app = express();
 const httpServer = createServer(app);
-const ioo = new Server(httpServer, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-    transports: ['websocket', 'polling'],
-    credentials: true
-},
-allowEIO3: true
-});
-
 app.use(cors({
   origin: '*',
   methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
@@ -54,26 +44,7 @@ app.set('trust proxy', true)
 // }));
 app.use(bodyParser.text({type:"*/*",limit:'50mb'}));
  
-
-
 httpServer.listen(process.env.PORT || 8000);
-
-
-
-
-const storage=multer.diskStorage({
-  destination:(req,file,cb)=>{
-    cb(null,'images')
-  },
-  filename:(req,file,cb)=>{
-    console.log(file)
-    cb(null,Date.now() + path.extname(file.originalname) )
-  }
-})
-
-const upload=multer({storage:storage})
-
-
 
 
 
@@ -98,6 +69,11 @@ app.get('/',async (req, res) => {
       res.send(ge)  
     })
 
+app.get('/chatdata',async (req, res) => {
+  var ge=await chat_collec.find().sort({_id:-1}).limit(1).skip(req.headers.n |0)
+  res.send(ge)  
+})
+
 
 
 
@@ -110,7 +86,7 @@ app.get('/pj',async (req, res) => {
 
 
 
-  app.post('/pj',upload.single('imges') , (req, res) => {
+  app.post('/pj',(req, res) => {
 
  console.log(req.body) 
 
