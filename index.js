@@ -86,7 +86,7 @@ app.post('/chatdata',async (req, res) => {
     platform:JSON.parse(req.body).platform,
   }).save()
   
-    res.send('ii')    
+    res.send(await chat_collec.find({num:number+1}).sort({_id:-1}).limit(1))    
 })
 
 
