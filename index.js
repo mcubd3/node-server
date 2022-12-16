@@ -85,7 +85,7 @@ app.post('/chatdata',async (req, res) => {
     platform:JSON.parse(req.body).platform,
   }).save()
   
-    res.send('1') 
+    res.send('ii') 
 })
 
 
