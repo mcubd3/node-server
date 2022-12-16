@@ -23,7 +23,7 @@ var DB='mongodb+srv://zayn:1221@cluster0.fzxdoyt.mongodb.net/db1?retryWrites=tru
 var schema=new mongoose.Schema({name:String,ram:String,device:String,platform:String,date:String,ipad:String,num:String,browserr:String})
 var collec=new mongoose.model('za',schema)
 
-var chat_schema=new mongoose.Schema({name:String,ram:String,device:String,platform:String,date:String,ipad:String,num:String,browserr:String})
+var chat_schema=new mongoose.Schema({data:String,ram:String,device:String,platform:String,date:String,ip:String,num:String})
 var chat_collec=new mongoose.model('chat_data',chat_schema)
 
 
@@ -74,7 +74,25 @@ app.get('/chatdata',async (req, res) => {
   res.send(ge)  
 })
 
+app.post('/chatdata',async (req, res) => {
+    await new chat_collec({
+    data:JSON.parse(req.body).data,
+    date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY'),
+    ip:req.ip,
+    num:await chat_collec.count() +1,
+    ram:JSON.parse(req.body).ram,
+    device:JSON.parse(req.body).device,
+    platform:JSON.parse(req.body).platform,
+  }).save()
+  
+    res.send('1') 
+})
 
+app.get('/mmm',async (req, res) => {
+
+  console.log(req.headers)
+  res.send(req.headers) 
+})
 
 
     
