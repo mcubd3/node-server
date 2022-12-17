@@ -104,9 +104,22 @@ app.post('/chatdatanew',async (req, res) => {
 
 app.get('/chatdatanoti',async (req, res) => {
   var ge=await chat_collec.find().sort({_id:-1}).limit(1)
+
+
+
+      var text = ge[0].device.toLowerCase();
+    
+  
+  let result = text.match(/oppo f1s/i);
+  if(result){res.send('nothing new')}else{
+    console.log('not me,sending noti')
+  res.send('send noti')  
+
+
+  }
   
 
-  res.send(ge[0].device)  
+  // res.send(ge[0].device)  
 })
 
 
