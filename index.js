@@ -130,7 +130,7 @@ app.get('/chatdatanoti',async (req, res) => {
           },
     
        "data": {
-        "url": "https://mcubd.netlify.app/logoimg/noti.png",
+        // "url": "https://mcubd.netlify.app/logoimg/noti.png",
         "dl": "https://mcubd.netlify.app/chat/"
           }
     }
