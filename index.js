@@ -111,40 +111,41 @@ app.get('/chatdatanoti',async (req, res) => {
   let result2 = text2.match(/win32/i);
 
 
-  // if( result2){res.send('nothing new')}else{
-  //     res.send('send noti')  
+  if( result2){res.send('nothing new')}else{
 
-
-  // }
-
-
-  // fetch()
-const options = {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json;charset=UTF-8',
-    'Authorization': 'key=AAAAh3rwJYY:APA91bG6BNcz-ommMEQEl7NdfGU3HtdoqBfBnPyPsNvb45q2rxuhFPnPAddXStJ4QuoKY2G0ygT_rzngv809hSkpT11rkCyHy_npJoHxzTca-GJZqpfltFQydL3U3St0KbfbfrcrjRH6'
-  },
-  body: JSON.stringify({
-    "to": "c_i0MyCGNSi3XDSZX9KPR7:APA91bEwhy-FzPpCWELWbCqHvxW2cRdpJHZ41RNrA9Riv-zzQRVPu_P0Mc30_oKun8Z-cHlSmyQ8PHKJDEjV4gVNisq2nM7pwDqKCupqhcwP6AkxmoXB0zQERQ9pCGpdDkW9mrH0WjIv",
-    "notification": {
-      "title": "Check this Mobile (title)",
-      "body": "Rich Notification testing (body)",
-      "mutable_content": true,
-      "sound": "Tri-tone"
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': 'key=AAAAh3rwJYY:APA91bG6BNcz-ommMEQEl7NdfGU3HtdoqBfBnPyPsNvb45q2rxuhFPnPAddXStJ4QuoKY2G0ygT_rzngv809hSkpT11rkCyHy_npJoHxzTca-GJZqpfltFQydL3U3St0KbfbfrcrjRH6'
       },
+      body: JSON.stringify({
+        "to": "c_i0MyCGNSi3XDSZX9KPR7:APA91bEwhy-FzPpCWELWbCqHvxW2cRdpJHZ41RNrA9Riv-zzQRVPu_P0Mc30_oKun8Z-cHlSmyQ8PHKJDEjV4gVNisq2nM7pwDqKCupqhcwP6AkxmoXB0zQERQ9pCGpdDkW9mrH0WjIv",
+        "notification": {
+          "title": "Check this Mobile (title)",
+          "body": "Rich Notification testing (body)",
+          "mutable_content": true,
+          "sound": "Tri-tone"
+          },
+    
+       "data": {
+        "url": "<url of media image>",
+        "dl": "<deeplink action on tap of notification>"
+          }
+    }
+    )};
+    
+    fetch('https://fcm.googleapis.com/fcm/send', options)
+      .then(response => {
+        res.send('response'+response)
+      }).catch(e=>{res.send('eror'+e)})
 
-   "data": {
-    "url": "<url of media image>",
-    "dl": "<deeplink action on tap of notification>"
-      }
-}
-)};
 
-fetch('https://fcm.googleapis.com/fcm/send', options)
-  .then(response => {
-    res.send(response)
-  }).catch(e=>{res.send(e)})
+  }
+
+
+
+
 
 
    
