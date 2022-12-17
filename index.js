@@ -102,6 +102,12 @@ app.post('/chatdatanew',async (req, res) => {
 })
 
 
+app.get('/chatdatanoti',async (req, res) => {
+  var ge=await chat_collec.find().sort({_id:-1}).limit(1)
+  res.send(ge)  
+})
+
+
 
 app.get('/pj',async (req, res) => {
 
