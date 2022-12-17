@@ -97,7 +97,7 @@ app.post('/chatdatahis',async (req, res) => {
    })
 
 app.post('/chatdatanew',async (req, res) => {
-    var ge=await chat_collec.find({num:req.body +1}).sort({_id:-1}).limit(1)
+    var ge=await chat_collec.find({num:req.body+1}).sort({_id:-1}).limit(1)
     res.send({"ge":ge,"reqbody":req.body})  
 })
 
