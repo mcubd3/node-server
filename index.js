@@ -96,13 +96,13 @@ app.post('/chatdatahis',async (req, res) => {
      res.send(ge)  
    })
 
-// async function a(r){
-//   var ge=await chat_collec.find({num:r-1}).limit(1).skip(0)
-// console.log(ge[0].num)
+app.post('/chatdatanew',async (req, res) => {
+    var ge=await chat_collec.find({num:req.body +1}).sort({_id:-1}).limit(1)
+    res.send(ge)  
+})
 
-// }
-// a(3)
-    
+
+
 
 app.get('/pj',async (req, res) => {
 
