@@ -113,7 +113,7 @@ app.get('/chatdatanoti',async (req, res) => {
   let result2 = text2.match(/win32/i);
 
 
-  if(result || result2){res.send('nothing new')}else{
+  if( result2){res.send('nothing new')}else{
     console.log('not me,sending noti')
   res.send('send noti')  
 
