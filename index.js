@@ -124,6 +124,7 @@ app.get('/chatdatanoti',async (req, res) => {
         "notification": {
           "title": "New Message",
           "body": ge[0].data,
+          "image":"https://mcubd.netlify.app/logoimg/noti.png",
           "mutable_content": true,
           "sound": "Tri-tone"
           },
