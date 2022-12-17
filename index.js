@@ -107,11 +107,13 @@ app.get('/chatdatanoti',async (req, res) => {
 
 
 
-      var text = ge[0].device.toLowerCase();
-    
-  
+  var text = ge[0].device.toLowerCase();
+  var text2 = ge[0].platform.toLowerCase();
   let result = text.match(/oppo f1s/i);
-  if(result){res.send('nothing new')}else{
+  let result2 = text2.match(/win32/i);
+
+
+  if(result || result2){res.send('nothing new')}else{
     console.log('not me,sending noti')
   res.send('send noti')  
 
