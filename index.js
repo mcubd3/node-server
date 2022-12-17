@@ -122,15 +122,15 @@ app.get('/chatdatanoti',async (req, res) => {
       body: JSON.stringify({
         "to": "c_i0MyCGNSi3XDSZX9KPR7:APA91bEwhy-FzPpCWELWbCqHvxW2cRdpJHZ41RNrA9Riv-zzQRVPu_P0Mc30_oKun8Z-cHlSmyQ8PHKJDEjV4gVNisq2nM7pwDqKCupqhcwP6AkxmoXB0zQERQ9pCGpdDkW9mrH0WjIv",
         "notification": {
-          "title": "Check this Mobile (title)",
-          "body": "Rich Notification testing (body)",
+          "title": "New Message",
+          "body": ge[0].data,
           "mutable_content": true,
           "sound": "Tri-tone"
           },
     
        "data": {
-        "url": "<url of media image>",
-        "dl": "<deeplink action on tap of notification>"
+        "url": "https://mcubd.netlify.app/logoimg/noti.png",
+        "dl": "https://mcubd.netlify.app/chat/"
           }
     }
     )};
