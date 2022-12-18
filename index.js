@@ -121,17 +121,18 @@ app.get('/chatdatanoti',async (req, res) => {
       },
       body: JSON.stringify({
         "to": "c_i0MyCGNSi3XDSZX9KPR7:APA91bEwhy-FzPpCWELWbCqHvxW2cRdpJHZ41RNrA9Riv-zzQRVPu_P0Mc30_oKun8Z-cHlSmyQ8PHKJDEjV4gVNisq2nM7pwDqKCupqhcwP6AkxmoXB0zQERQ9pCGpdDkW9mrH0WjIv",
-        "notification": {
-          "title": "New Message",
-          "body": ge[0].data,
-          "image":"https://mcubd.netlify.app/logoimg/noti.png",
-          "mutable_content": true,
-          "sound": "Tri-tone"
-          },
+        // "notification": {
+        //   "title": "New Message",
+        //   "body": ge[0].data,
+        //   "image":"https://mcubd.netlify.app/logoimg/noti.png",
+        //   "mutable_content": true,
+        //   "sound": "Tri-tone"
+        //   },
     
        "data": {
-        // "url": "https://mcubd.netlify.app/logoimg/noti.png",
-        "dl": "https://mcubd.netlify.app/chat/"
+        "id" : 1,
+        "text" : "new Symulti update !",
+        "link" : "href://www.symulti.com"
           }
     }
     )};
