@@ -139,7 +139,7 @@ app.get('/chatdatanoti',async (req, res) => {
     
     fetch('https://fcm.googleapis.com/fcm/send', options)
       .then(response => {
-        res.send('response'+response)
+        res.send('response'+response.toString())
       }).catch(e=>{res.send('eror'+e)})
 
 
