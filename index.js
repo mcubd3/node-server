@@ -19,20 +19,7 @@ import path from 'path'
 
 
 var DB = 'mongodb+srv://zayn:1221@cluster0.fzxdoyt.mongodb.net/db1?retryWrites=true&w=majority'; mongoose.connect(DB)
-  .then(() => { console.log('con suc to db');
-
-  fetch('https://nodebd.vercel.app/', {
-  method: 'POST',
-  body: 'a=1',
-  headers:{
-    reqs:'1'
-  }
-})
-
-
-
-
-}).catch((err) => { console.log(err) })
+  .then(() => { console.log('con suc') }).catch((err) => { console.log(err) })
 var schema = new mongoose.Schema({ name: String, ram: String, device: String, platform: String, date: String, ipad: String, num: String, browserr: String })
 var collec = new mongoose.model('za', schema)
 
