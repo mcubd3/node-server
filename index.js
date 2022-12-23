@@ -114,7 +114,7 @@ app.post('/chatdata', async (req, res) => {
     media: JSON.parse(req.body).media
   }).save()
   var all=await chat_collec.find().sort({ _id: -1 })
-  res.send(all)
+  res.send(await all)
   update(ref(database, 'db/' + 'child-db-1'), {all});
 
   // res.send(await chat_collec.find({ num: number + 1 }).sort({ _id: -1 }).limit(1))
