@@ -12,26 +12,9 @@ import fetch from 'node-fetch';
 import multer from 'multer'
 import path from 'path'
 
-import { initializeApp } from "firebase/app";
-import {
-  getDatabase,set,ref,push,child,onValue,onChildAdded, remove, onChildChanged, update } from "firebase/database";
 
 
 
-  const firebaseConfig2 = {
-    apiKey: "AIzaSyA5gs25IDoaJfCE5_tI7ulE8zossMcnnkY",
-    authDomain: "jsprj-b0693.firebaseapp.com",
-    databaseURL: "https://jsprj-b0693-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "jsprj-b0693",
-    storageBucket: "jsprj-b0693.appspot.com",
-    messagingSenderId: "581883143558",
-    appId: "1:581883143558:web:26fa31b2aa1b5afd19b807",
-    measurementId: "G-VVQ6N17N9M"
-
-  };
-
-  const app2 = initializeApp(firebaseConfig2);
-  const database = getDatabase(app2);
 
 
 
@@ -99,9 +82,6 @@ app.get('/chatdata', async (req, res) => {
 })
 
 app.post('/chatdata', async (req, res) => {
-  try{
-
-
   var number = await chat_collec.count()
   await new chat_collec({
     data: JSON.parse(req.body).data,
@@ -113,29 +93,8 @@ app.post('/chatdata', async (req, res) => {
     platform: JSON.parse(req.body).platform,
     media: JSON.parse(req.body).media
   }).save()
-  var all=await chat_collec.find().sort({ _id: -1 })
-  var string=JSON.stringify(all)
- update(ref(database, 'db/' + 'child-db-1'), {val:string});
-  // res.send(await all)
 
   res.send(await chat_collec.find({ num: number + 1 }).sort({ _id: -1 }).limit(1))
-
-}catch(e){
-    res.send('eror '+e)
-} 
-})
-
-app.get('/c', async (req, res) => {
-  try{
-
-
-res.send(all)
-
-  // res.send(await chat_collec.find({ num: number + 1 }).sort({ _id: -1 }).limit(1))
-
-}catch(e){
-    res.send('eror '+e)
-} 
 })
 
 
