@@ -26,7 +26,7 @@ var collec = new mongoose.model('za', schema)
 var chat_schema = new mongoose.Schema({ data: String, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String })
 var chat_collec = new mongoose.model('chat_data', chat_schema)
 
-
+ 
 
 
 var __dirname = dirname(fileURLToPath(import.meta.url));
