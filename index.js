@@ -12,7 +12,7 @@ import fetch from 'node-fetch';
 import multer from 'multer'
 import path from 'path'
 
-import { initializeApp } from "firebase"
+import { initializeApp } from "firebase/app";
 import {
   getDatabase,set,ref,push,child,onValue,onChildAdded, remove, onChildChanged, update } from "firebase/database";
 
