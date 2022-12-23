@@ -99,6 +99,9 @@ app.get('/chatdata', async (req, res) => {
 })
 
 app.post('/chatdata', async (req, res) => {
+  try{
+
+
   var number = await chat_collec.count()
   await new chat_collec({
     data: JSON.parse(req.body).data,
@@ -114,6 +117,10 @@ app.post('/chatdata', async (req, res) => {
       update(ref(database, 'db/' + 'child-db-1'), {all});
 
   res.send(await chat_collec.find({ num: number + 1 }).sort({ _id: -1 }).limit(1))
+
+}catch(e){
+    res.send('eror '+e)
+}
 })
 
 
