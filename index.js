@@ -120,7 +120,7 @@ app.post('/chatdata', async (req, res) => {
 
 }catch(e){
     res.send('eror '+e)
-}
+} 
 })
 
 
