@@ -100,7 +100,7 @@ app.post('/chatdata', async (req, res) => {
 
 app.post('/chatdatahis', async (req, res) => {
   // var ge = await chat_collec.find({ num: req.body - 1 }).limit(1).skip(0)
-  var ge = await chat_collec.find({ num:{$in: [req.body-1,req.body-2,req.body-3,req.body-4,req.body-5,req.body-6,req.body-7,req.body-8,req.body-9,req.body-10]} }).sort({_id:-1})
+  var ge = await chat_collec.find({ num:{$in: [req.body-1,req.body-2,req.body-3,req.body-4,req.body-5,req.body-6,req.body-7,req.body-8,req.body-9,req.body-10,req.body-11,req.body-12,req.body-13,req.body-14,req.body-15,req.body-16,req.body-17,req.body-18,req.body-19,req.body-20]} }).sort({_id:-1})
   res.send(ge)
 })
 
