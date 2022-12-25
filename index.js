@@ -79,7 +79,7 @@ app.get('/all', async (req, res) => {
 app.get('/chatdata', async (req, res) => {
   // var ge = await chat_collec.find().sort({ _id: -1 }).limit(1).skip(req.headers.n | 0)
   // res.send(ge)
-  var ge = await chat_collec.find({},{_id:0,ram:0,device:0,platform:0,__v:0}).sort({ _id: -1 }).limit(20)
+  var ge = await chat_collec.find({},{_id:0,ram:0,device:0,platform:0,__v:0}).sort({ _id: -1 }).limit(10)
   res.send(ge)
 })
 
