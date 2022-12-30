@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,7 @@
     "eiows": "^4.1.2",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
+    "file-type": "^18.0.0",
     "firebase": "^9.15.0",
     "moment": "^2.29.3",
     "moment-timezone": "^0.5.34",
@@ -25,5 +27,9 @@
     "multer": "^1.4.5-lts.1",
     "socket.io": "^4.5.1",
     "socket.io-client": "^4.5.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   }
 }

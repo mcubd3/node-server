@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #sub{
+            padding: 20px;
+            margin-top: 40px;
+        }
+        #vid{
+            padding: 20px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="form" method="post" enctype="multipart/form-data" >
+        <input type="file" name="NAME" id="vid">
+        <br>
+        <input type="submit" id="sub" value="upload">
+
+    </form>
+
+    <script>
+        var r=document.URL
+        console.log(window.location.hostname+':'+window.location.port+'/up')
+        // alert(window.location.hostname+'/up')
+        console.log(window.location.port)
+        const form=document.getElementById('form');
+        form.addEventListener('submit',function (e){
+            e.preventDefault()
+            const fileinput=document.getElementById('vid')
+            const file =fileinput.files[0]
+
+            
+            const formdata=new FormData();
+            formdata.append('NAME',file)
+
+            fetch('http://192.168.0.100:8000/up',{
+                method:'POST',
+                headers:{
+                    filename:'file.name'
+                },
+                body:formdata
+            }).then(function (res){
+                alert('uploaded')
+            
+            
+            }).catch(function (e){
+                console.log(e)
+                alert(e)
+            
+            
+            })
+        
+        })
+
+    </script>
+</body>
+</html>

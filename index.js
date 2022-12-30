@@ -11,6 +11,9 @@ import bodyParser from 'body-parser'
 import fetch from 'node-fetch';
 import multer from 'multer'
 import path from 'path'
+import {fileTypeFromStream} from 'file-type';
+
+
 
 
 
@@ -42,7 +45,7 @@ app.set('trust proxy', true)
 // app.use(bodyParser.json({
 //   limit: '50mb'
 // }));
-app.use(bodyParser.text({ type: "*/*", limit: '50mb' }));
+// app.use(bodyParser.text({ type: "*/*", limit: '50mb' }));
 
 httpServer.listen(process.env.PORT || 8000);
 
@@ -294,10 +297,38 @@ app.get('/downmv', async (req, res) => {
 
 
 
+app.get('/fileup', async (req, res) => {res.sendFile(__dirname+'/z.html')})
+const storage=multer.diskStorage({
+  destination:(req,file,cb) => {
+    var fold=path.join(__dirname,'..','..','..','Downloads')
+    cb(null ,fold)
+  },
+  filename:(req,file,cb) => {
+    const fext=path.extname(file.originalname);
+    const fname=file.originalname
+                .replace(fext,"")
+                .toLowerCase()
+                .split(" ")
+                .join("-")+"-"+ Date.now();
+                console.log(file.originalname)
+    cb(null, fname+fext)
+   
+  }
+})
+const upload=multer({
+storage:storage,
+  limits:{fieldSize:100000000000000000000000},
+}) 
+app.post('/up',upload.single('NAME'),(req,res) => { res.send('kk') })
+ 
 
-// var t=async () => {
-//   var ge=await collec.count()
-//  console.log(ge)
-// }
+app.post('/filetype',async (req,res) => {
+  const url = 'https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg';
 
-// t()
+  const response = await fetch(url);
+  const fileType = await fileTypeFromStream(response.body);
+  
+  res.json(fileType)
+})
+
+
