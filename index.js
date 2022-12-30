@@ -323,12 +323,14 @@ app.post('/up',upload.single('NAME'),(req,res) => { res.send('kk') })
  
 
 app.post('/filetype',async (req,res) => {
-  const url = 'https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg';
-
-  const response = await fetch(url);
+try{
+  const response = await fetch(req.body);
   const fileType = await fileTypeFromStream(response.body);
   
   res.json(fileType)
+}catch(e){
+res.send(e)
+}
 })
 
 
