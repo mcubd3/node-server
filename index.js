@@ -45,7 +45,7 @@ app.set('trust proxy', true)
 // app.use(bodyParser.json({
 //   limit: '50mb'
 // }));
-// app.use(bodyParser.text({ type: "*/*", limit: '50mb' }));
+app.use(bodyParser.text({ type: "*/*", limit: '50mb' }));
 
 httpServer.listen(process.env.PORT || 8000);
 
@@ -328,8 +328,10 @@ try{
   const fileType = await fileTypeFromStream(response.body);
   
   res.json(fileType)
+  console.log(fileType)
 }catch(e){
 res.send(e)
+console.log(e)
 }
 })
 
