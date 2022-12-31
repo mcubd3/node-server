@@ -1,17 +1,17 @@
-import mongoose from 'mongoose';
-import express from 'express';
-import cors from 'cors';
-import moment from 'moment-timezone';
-import { createServer } from "http";
-import { Server } from "socket.io";
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import * as fs from 'fs';
-import bodyParser from 'body-parser'
-import fetch from 'node-fetch';
-import multer from 'multer'
-import path from 'path'
-import {fileTypeFromStream} from 'file-type';
+// import mongoose from 'mongoose';
+// import express from 'express';
+// import cors from 'cors';
+// import moment from 'moment-timezone';
+// import { createServer } from "http";
+// import { Server } from "socket.io";
+// import { dirname } from 'path';
+// import { fileURLToPath } from 'url';
+// import * as fs from 'fs';
+// import bodyParser from 'body-parser'
+// import fetch from 'node-fetch';
+// import multer from 'multer'
+// import path from 'path'
+// import {fileTypeFromStream} from 'file-type';
 
 
 
@@ -85,6 +85,7 @@ app.get('/chatdata', async (req, res) => {
   var ge = await chat_collec.find({},{_id:0,ram:0,device:0,platform:0,__v:0}).sort({ _id: -1 }).limit(10)
   res.send(ge)
 })
+
 
 app.post('/chatdata', async (req, res) => {
   var number = await chat_collec.count()
