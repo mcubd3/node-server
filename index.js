@@ -26,7 +26,7 @@ var DB = 'mongodb+srv://zayn:1221@cluster0.fzxdoyt.mongodb.net/db1?retryWrites=t
 var schema = new mongoose.Schema({ name: String, ram: String, device: String, platform: String, date: String, ipad: String, num: String, browserr: String })
 var collec = new mongoose.model('za', schema)
 
-var chat_schema = new mongoose.Schema({ data: String, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String })
+var chat_schema = new mongoose.Schema({ data: String, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String,fname:String })
 var chat_collec = new mongoose.model('chat_data', chat_schema)
 
  
@@ -96,7 +96,8 @@ app.post('/chatdata', async (req, res) => {
     ram: JSON.parse(req.body).ram,
     device: JSON.parse(req.body).device,
     platform: JSON.parse(req.body).platform,
-    media: JSON.parse(req.body).media
+    media: JSON.parse(req.body).media,
+    fname:JSON.parse(req.body).fname,
   }).save()
 
   res.send(await chat_collec.find({ num: number + 1 }).sort({ _id: -1 }).limit(1))
