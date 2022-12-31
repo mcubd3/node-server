@@ -324,15 +324,12 @@ app.post('/up',upload.single('NAME'),(req,res) => { res.send('kk') })
 
 app.post('/filetype',async (req,res) => {
 try{
-  const response = await fetch(req.body);
-  const fileType = await fileTypeFromStream(response.body);
   
-  res.json(fileType)
-  console.log(fileType)
-}catch(e){
-res.send(e)
-console.log(e)
-}
-})
+  const response = await fetch(req.body);
+  console.log(response.body)
+  const fileType = await fileTypeFromStream(response.body);
+  console.log(fileType);res.send(fileType);
+}catch(e){ console.log('eror'+e);res.send(e) }  
+}) 
 
 
