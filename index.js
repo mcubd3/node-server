@@ -326,7 +326,7 @@ app.post('/filetype',async (req,res) => {
 try{
   
   const response = await fetch(req.body);
-  console.log(response.body)
+  // console.log(response.body)
   const fileType = await fileTypeFromStream(response.body);
   console.log(fileType);res.send(fileType);
 }catch(e){ console.log('eror'+e);res.send(e) }  
