@@ -213,6 +213,12 @@ app.get('/d0000000000', async (req, res) => {
   res.send(ge)
 })
 
+app.get('/chathis/d0000000000', async (req, res) => {
+  var ge = await chat_collec.deleteMany()
+
+  res.send(ge)
+})
+
 
 
 app.get('/loki', async (req, res) => {
