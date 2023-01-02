@@ -171,12 +171,12 @@ app.get('/chatdatanoti', async (req, res) => {
 })
 
 app.get('/not', async (req, res) => {
-  var ge = await chat_collec.find().sort({ _id: -1 }).limit(1)
+  // var ge = await chat_collec.find().sort({ _id: -1 }).limit(1)
 
-  var text = ge[0].device.toLowerCase();
-  var text2 = ge[0].platform.toLowerCase();
-  let result = text.match(/oppo f1s/i);
-  let result2 = text2.match(/win32/i);
+  // var text = ge[0].device.toLowerCase();
+  // var text2 = ge[0].platform.toLowerCase();
+  // let result = text.match(/oppo f1s/i);
+  // let result2 = text2.match(/win32/i);
 
 
   if (0) { res.send('nothing new') } else {
@@ -191,7 +191,7 @@ app.get('/not', async (req, res) => {
         "to": "eYENZKNwVVdYKF0DxMmGHx:APA91bH9Fr4GpAkTYyJgH29t3TWTig2E8Mq6w7WsjsaQtM03q5rs4oAc8lWmnsT0VQVQLsli-74phkO_chrdBjB8QXjHZoNXi0WWsqTkj0aY48y7MJMEAs3dBKBO6vhVX49Lsovc3DW_",
         "notification": {
           "title": "New Message",
-          "body": ge[0].data,
+          "body": 'ge[0].data',
           "image": "https://mcubd.netlify.app/logoimg/noti.png",
           "mutable_content": true,
           "sound": "Tri-tone"
