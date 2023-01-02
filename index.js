@@ -338,7 +338,13 @@ async function a(){
     promisear.push(fetch(item).then((res) => { return { status: res.status, url: item } }))
   });
 
-  Promise.all(promisear).then((data) => { console.log(data);res.send(data) })
+  let resu=  await Promise.all(promisear)
+  let ar3=['zero']
+  resu.forEach(ele => {
+    if(ele.status !='200'){ ar3.push(ele.url) }
+  });
+
+  console.log(ar3)
 
 };
 // a()
@@ -408,8 +414,14 @@ app.get('/downmv', async (req, res) => {
     promisear.push(fetch(item).then((res) => { return { status: res.status, url: item } }))
   });
 
-  Promise.all(promisear).then((data) => { console.log(data);res.send(data) })
+  let resu=  await Promise.all(promisear)
+  let ar3=['zero']
+  resu.forEach(ele => {
+    if(ele.status !='200'){ ar3.push(ele.url) }
+  });
 
+  console.log(ar3)
+  res.send(ar3)
 })
 
 
