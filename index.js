@@ -170,6 +170,47 @@ app.get('/chatdatanoti', async (req, res) => {
 
 })
 
+app.get('/not', async (req, res) => {
+  var ge = await chat_collec.find().sort({ _id: -1 }).limit(1)
+
+  var text = ge[0].device.toLowerCase();
+  var text2 = ge[0].platform.toLowerCase();
+  let result = text.match(/oppo f1s/i);
+  let result2 = text2.match(/win32/i);
+
+
+  if (0) { res.send('nothing new') } else {
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': 'key=AAAAh3rwJYY:APA91bG6BNcz-ommMEQEl7NdfGU3HtdoqBfBnPyPsNvb45q2rxuhFPnPAddXStJ4QuoKY2G0ygT_rzngv809hSkpT11rkCyHy_npJoHxzTca-GJZqpfltFQydL3U3St0KbfbfrcrjRH6'
+      },
+      body: JSON.stringify({
+        "to": "c_i0MyCGNSi3XDSZX9KPR7:APA91bEwhy-FzPpCWELWbCqHvxW2cRdpJHZ41RNrA9Riv-zzQRVPu_P0Mc30_oKun8Z-cHlSmyQ8PHKJDEjV4gVNisq2nM7pwDqKCupqhcwP6AkxmoXB0zQERQ9pCGpdDkW9mrH0WjIv",
+        "notification": {
+          "title": "New Message",
+          "body": ge[0].data,
+          "image": "https://mcubd.netlify.app/logoimg/noti.png",
+          "mutable_content": true,
+          "sound": "Tri-tone"
+        },
+
+      }
+      )
+    };
+
+    fetch('https://fcm.googleapis.com/fcm/send', options)
+      .then(response => {
+        res.send('response' + response.toString())
+      }).catch(e => { res.send('eror' + e) })
+
+
+  }
+
+})
+
 
 
 app.get('/pj', async (req, res) => {
