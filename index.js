@@ -29,6 +29,9 @@ var collec = new mongoose.model('za', schema)
 var chat_schema = new mongoose.Schema({ data: String, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String,fname:String })
 var chat_collec = new mongoose.model('chat_data', chat_schema)
 
+var mv_links = new mongoose.Schema({ data: String, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String,fname:String })
+var mv_collec = new mongoose.model('mvlink', mv_links)
+
  
 
 
@@ -304,44 +307,109 @@ app.post('/ram', async (req, res) => {
 
 })
 
+async function a(){
+  let res= await mv_collec.findOne({name:'this'})
+  let str=JSON.stringify(res)
+  let json=JSON.parse(str)
+  let links=json.links
+  if(links[1] != '['){console.log('link is not array!'); return 'l' }
+  let arr=JSON.parse(links)
+  arr=[...arr[0],...arr[1],...arr[2]]
 
+  let ar2 = []
+
+  arr.forEach(i => {
+
+    if(JSON.parse(i).length==1){
+      ar2.push(JSON.parse(i)[0])
+    }else{
+          JSON.parse(i).forEach(item => {
+            ar2.push(item)});
+    }
+    
+  });
+ 
+
+
+
+  let promisear=[]
+
+  ar2.forEach(item => {
+    promisear.push(fetch(item).then((res) => { return { status: res.status, url: item } }))
+  });
+
+  Promise.all(promisear).then((data) => { console.log(data);res.send(data) })
+
+};
+// a()
 
 
 app.get('/downmv', async (req, res) => {
 
-  const response = await fetch('https://mcubd.netlify.app/mcubd.json');
-  const body = await response.text()
-  const statuss = await response.status
+  // const response = await fetch('https://mcubd.netlify.app/mcubd.json');
+  // const body = await response.text()
+  // const statuss = await response.status
 
-  if (statuss == 200) {
-    let json = JSON.parse(body)
+  // if (statuss == 200) {
+  //   let json = JSON.parse(body)
 
-    let arr = []
+  //   let arr = []
 
-    json.mcubd.forEach(item => {
-      arr.push(fetch(item).then((res) => { return { status: res.status, url: item, section: 'MCU' } }))
-    });
+  //   json.mcubd.forEach(item => {
+  //     arr.push(fetch(item).then((res) => { return { status: res.status, url: item, section: 'MCU' } }))
+  //   });
 
-    json.seris.forEach(item => {
-      arr.push(fetch(item).then((res) => { return { status: res.status, url: item, section: 'Seris' } }))
-    });
+  //   json.seris.forEach(item => {
+  //     arr.push(fetch(item).then((res) => { return { status: res.status, url: item, section: 'Seris' } }))
+  //   });
 
-    json.fox.forEach(item => {
-      arr.push(fetch(item).then((res) => { return { status: res.status, url: item, section: 'Fox' } }))
-    });
+  //   json.fox.forEach(item => {
+  //     arr.push(fetch(item).then((res) => { return { status: res.status, url: item, section: 'Fox' } }))
+  //   });
 
-    json.others.forEach(item => {
-      arr.push(fetch(item).then((res) => { return { status: res.status, url: item, section: 'Others' } }))
-    });
+  //   json.others.forEach(item => {
+  //     arr.push(fetch(item).then((res) => { return { status: res.status, url: item, section: 'Others' } }))
+  //   });
 
-    //  Promise.all(arr).then((data)=>console.table(data))
-    Promise.all(arr).then((data) => { res.send(data) })
-
+  //   Promise.all(arr).then((data) => { res.send(data) })
 
 
 
 
-  } else { res.send('mcubd.json status not 200') }
+
+  // } else { res.send('mcubd.json status not 200') }
+  let resp= await mv_collec.findOne({name:'this'})
+  let str=JSON.stringify(resp)
+  let json=JSON.parse(str)
+  let links=json.links
+  if(links[1] != '['){console.log('link is not array!'); return 'l' }
+  let arr=JSON.parse(links)
+  arr=[...arr[0],...arr[1],...arr[2]]
+
+  let ar2 = []
+
+  arr.forEach(i => {
+
+    if(JSON.parse(i).length==1){
+      ar2.push(JSON.parse(i)[0])
+    }else{
+          JSON.parse(i).forEach(item => {
+            ar2.push(item)});
+    }
+    
+  });
+ 
+
+
+
+  let promisear=[]
+
+  ar2.forEach(item => {
+    promisear.push(fetch(item).then((res) => { return { status: res.status, url: item } }))
+  });
+
+  Promise.all(promisear).then((data) => { console.log(data);res.send(data) })
+
 })
 
 
