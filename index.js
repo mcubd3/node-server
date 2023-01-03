@@ -222,7 +222,7 @@ app.get('/not', async (req, res) => {
 
 })
 
-app.post('/push-token', async (req, res) => {
+app.post('/push_token', async (req, res) => {
 
   // var b= await mlts_collec.updateMany({name:'push_token'}, { $set: { links: JSON.stringify( await bgfind3()) ,date:new Date().toLocaleDateString() } });
 
