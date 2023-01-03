@@ -12,6 +12,7 @@ import fetch from 'node-fetch';
 import multer from 'multer'
 import path from 'path'
 import {fileTypeFromStream} from 'file-type';
+import e from 'express';
 
 
 
@@ -219,6 +220,9 @@ app.get('/not', async (req, res) => {
       let resu=  await Promise.all(arr)
       res.send(resu)
 
+
+    }else{
+      res.send('not not send cuz 0 link down')
 
     }
     
