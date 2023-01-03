@@ -182,6 +182,7 @@ app.get('/not', async (req, res) => {
 
 
     if(doc1d.length != 1){
+      let arr=[]
       push_tokenar.forEach(i => {
 
         const options = {
@@ -203,32 +204,25 @@ app.get('/not', async (req, res) => {
           )
         };
 
-        fetch('https://fcm.googleapis.com/fcm/send', options)
-        .then(async (d) => {
-         console.log(await d.text())
-        })
-        .catch((e) => {
-         console.log(e)
-        })
+        // fetch('https://fcm.googleapis.com/fcm/send', options)
+        // .then(async (d) => {
+        //  console.log(await d.text())
+        // })
+        // .catch((e) => {
+        //  console.log(e)
+        // })
         
+        arr.push(fetch('https://fcm.googleapis.com/fcm/send', options).then((res) => { return { status: res.status} }))
 
 
       });
+      let resu=  await Promise.all(arr)
+      res.send(resu)
 
 
     }
-    res.send('ok')
     
-
-
-
-
-
-
-
-
-
-  
+    
 
 })
 
