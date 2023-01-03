@@ -213,12 +213,11 @@ app.get('/not', async (req, res) => {
 
 })
 
-app.get('/push_token', async (req, res) => {
-  let body='l'
+app.post('/push_token', async (req, res) => {
+
   let doc = await mlts_collec.findOne({name:"push_token"})
-  // let o= JSON.stringify(doc.data)
   let olddata= JSON.parse(doc.data) 
-  let fullar=[...olddata,...body]
+  let fullar=[...olddata,...req.body]
   console.log(fullar)
 
  
