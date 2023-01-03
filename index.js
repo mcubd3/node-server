@@ -22,18 +22,26 @@ import {fileTypeFromStream} from 'file-type';
 
 
 var DB = 'mongodb+srv://zayn:1221@cluster0.fzxdoyt.mongodb.net/db1?retryWrites=true&w=majority'; mongoose.connect(DB)
-  .then(() => { console.log('con suc') }).catch((err) => { console.log(err) })
+  .then(() => { console.log('connected to the db') }).catch((err) => { console.log(err) })
 var schema = new mongoose.Schema({ name: String, ram: String, device: String, platform: String, date: String, ipad: String, num: String, browserr: String })
 var collec = new mongoose.model('za', schema)
 
 var chat_schema = new mongoose.Schema({ data: String, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String,fname:String })
 var chat_collec = new mongoose.model('chat_data', chat_schema)
 
-var mv_links = new mongoose.Schema({ data: String, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String,fname:String })
-var mv_collec = new mongoose.model('mvlink', mv_links)
+var multis_schema = new mongoose.Schema({ data: String, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String,fname:String })
+var mlts_collec = new mongoose.model('multis', multis_schema)
 
  
-
+// async function aa(){
+//   let db = await mongoose.connection.db;
+//   var t= await db.collection('multi').rename('multis');
+// console.log(t) 
+// };
+// setTimeout(() => {
+  
+//   aa()
+// }, 6000);
 
 var __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -214,6 +222,13 @@ app.get('/not', async (req, res) => {
 
 })
 
+app.post('/push-token', async (req, res) => {
+
+  // var b= await mlts_collec.updateMany({name:'push_token'}, { $set: { links: JSON.stringify( await bgfind3()) ,date:new Date().toLocaleDateString() } });
+
+  res.send(req.body)
+})
+
 
 
 app.get('/pj', async (req, res) => {
@@ -307,47 +322,7 @@ app.post('/ram', async (req, res) => {
 
 })
 
-async function a(){
-  let res= await mv_collec.findOne({name:'this'})
-  let str=JSON.stringify(res)
-  let json=JSON.parse(str)
-  let links=json.links
-  if(links[1] != '['){console.log('link is not array!'); return 'l' }
-  let arr=JSON.parse(links)
-  arr=[...arr[0],...arr[1],...arr[2]]
 
-  let ar2 = []
-
-  arr.forEach(i => {
-
-    if(JSON.parse(i).length==1){
-      ar2.push(JSON.parse(i)[0])
-    }else{
-          JSON.parse(i).forEach(item => {
-            ar2.push(item)});
-    }
-    
-  });
- 
-
-
-
-  let promisear=[]
-
-  ar2.forEach(item => {
-    promisear.push(fetch(item).then((res) => { return { status: res.status, url: item } }))
-  });
-
-  let resu=  await Promise.all(promisear)
-  let ar3=['zero']
-  resu.forEach(ele => {
-    if(ele.status !='200'){ ar3.push(ele.url) }
-  });
-
-  console.log(ar3)
-
-};
-// a()
 
 
 app.get('/downmv', async (req, res) => {
@@ -384,7 +359,7 @@ app.get('/downmv', async (req, res) => {
 
 
   // } else { res.send('mcubd.json status not 200') }
-  let resp= await mv_collec.findOne({name:'this'})
+  let resp= await mlts_collec.findOne({name:'mcubd_links'})
   let str=JSON.stringify(resp)
   let json=JSON.parse(str)
   let links=json.links
@@ -405,9 +380,6 @@ app.get('/downmv', async (req, res) => {
     
   });
  
-
-
-
   let promisear=[]
 
   ar2.forEach(item => {
@@ -421,7 +393,40 @@ app.get('/downmv', async (req, res) => {
   });
 
   console.log(ar3)
-  res.send(ar3.length)
+ 
+  if(ar3.length != 1){
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Authorization': 'key=AAAAh3rwJYY:APA91bG6BNcz-ommMEQEl7NdfGU3HtdoqBfBnPyPsNvb45q2rxuhFPnPAddXStJ4QuoKY2G0ygT_rzngv809hSkpT11rkCyHy_npJoHxzTca-GJZqpfltFQydL3U3St0KbfbfrcrjRH6'
+      },
+      body: JSON.stringify({
+        "to": "eYENZKNwVVdYKF0DxMmGHx:APA91bH9Fr4GpAkTYyJgH29t3TWTig2E8Mq6w7WsjsaQtM03q5rs4oAc8lWmnsT0VQVQLsli-74phkO_chrdBjB8QXjHZoNXi0WWsqTkj0aY48y7MJMEAs3dBKBO6vhVX49Lsovc3DW_",
+        "notification": {
+          "title": "New Message",
+          "body": 'ge[0].data',
+          "image": "https://mcubd.netlify.app/logoimg/noti.png",
+          "mutable_content": true,
+          "sound": "Tri-tone"
+        },
+
+      }
+      )
+    };
+
+    fetch('https://fcm.googleapis.com/fcm/send', options)
+      .then(response => {
+        res.send('response' + response.toString())
+      }).catch(e => { res.send('eror' + e) })
+
+
+
+
+  }
+
+
+  res.send(ar3)
 })
 
 
