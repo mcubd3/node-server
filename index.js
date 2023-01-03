@@ -421,7 +421,7 @@ app.get('/downmv', async (req, res) => {
   });
 
   console.log(ar3)
-  res.send(ar3)
+  res.send(ar3.length)
 })
 
 
