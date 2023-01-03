@@ -173,43 +173,62 @@ app.get('/chatdatanoti', async (req, res) => {
 })
 
 app.get('/not', async (req, res) => {
-  // var ge = await chat_collec.find().sort({ _id: -1 }).limit(1)
 
-  // var text = ge[0].device.toLowerCase();
-  // var text2 = ge[0].platform.toLowerCase();
-  // let result = text.match(/oppo f1s/i);
-  // let result2 = text2.match(/win32/i);
+  let doc1 = await mlts_collec.findOne({name:"down_mv_count"})
+  let doc1d=JSON.parse(doc1.data)
 
-
-  if (0) { res.send('nothing new') } else {
-
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-        'Authorization': 'key=AAAAh3rwJYY:APA91bG6BNcz-ommMEQEl7NdfGU3HtdoqBfBnPyPsNvb45q2rxuhFPnPAddXStJ4QuoKY2G0ygT_rzngv809hSkpT11rkCyHy_npJoHxzTca-GJZqpfltFQydL3U3St0KbfbfrcrjRH6'
-      },
-      body: JSON.stringify({
-        "to": "eYENZKNwVVdYKF0DxMmGHx:APA91bH9Fr4GpAkTYyJgH29t3TWTig2E8Mq6w7WsjsaQtM03q5rs4oAc8lWmnsT0VQVQLsli-74phkO_chrdBjB8QXjHZoNXi0WWsqTkj0aY48y7MJMEAs3dBKBO6vhVX49Lsovc3DW_",
-        "notification": {
-          "title": "New Message",
-          "body": 'ge[0].data',
-          "image": "https://mcubd.netlify.app/logoimg/noti.png",
-          "mutable_content": true,
-          "sound": "Tri-tone"
-        },
-
-      }
-      )
-    };
-
-    fetch('https://fcm.googleapis.com/fcm/send', options)
-      .then(response => {
-        res.send('response' + response.toString())
-      }).catch(e => { res.send('eror' + e) })
+    let doc = await mlts_collec.findOne({name:"push_token"})
+    let push_tokenar= JSON.parse(doc.data) 
 
 
-  }
+    if(doc1d.length != 1){
+      push_tokenar.forEach(i => {
+
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Authorization': 'key=AAAAh3rwJYY:APA91bG6BNcz-ommMEQEl7NdfGU3HtdoqBfBnPyPsNvb45q2rxuhFPnPAddXStJ4QuoKY2G0ygT_rzngv809hSkpT11rkCyHy_npJoHxzTca-GJZqpfltFQydL3U3St0KbfbfrcrjRH6'
+          },
+          body: JSON.stringify({
+            "to": i,
+            "notification": {
+              "title": "g drive movie 404",
+              // "body": 'g drive movie 404',
+              // "image": "https://mcubd.netlify.app/logoimg/noti.png",
+              "mutable_content": true,
+              "sound": "Tri-tone"
+            },
+          }
+          )
+        };
+
+        fetch('https://fcm.googleapis.com/fcm/send', options)
+        .then(async (d) => {
+         console.log(await d.text())
+        })
+        .catch((e) => {
+         console.log(e)
+        })
+        
+
+
+      });
+
+
+    }
+    res.send('ok')
+    
+
+
+
+
+
+
+
+
+
+  
 
 })
 
@@ -219,12 +238,7 @@ app.post('/push_token', async (req, res) => {
   let olddata= JSON.parse(doc.data) 
   let fullar=[...olddata,req.body]
   console.log(fullar)
-
- 
-
   var b= await mlts_collec.updateMany({name:'push_token'}, { $set: { data: JSON.stringify(fullar) ,date:new Date().toLocaleDateString() } });
-
-
   res.send(b)
 })
 
@@ -361,40 +375,16 @@ app.get('/downmv', async (req, res) => {
 
   console.log(ar3)
  
-  if(ar3.length != 1){
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-        'Authorization': 'key=AAAAh3rwJYY:APA91bG6BNcz-ommMEQEl7NdfGU3HtdoqBfBnPyPsNvb45q2rxuhFPnPAddXStJ4QuoKY2G0ygT_rzngv809hSkpT11rkCyHy_npJoHxzTca-GJZqpfltFQydL3U3St0KbfbfrcrjRH6'
-      },
-      body: JSON.stringify({
-        "to": "eYENZKNwVVdYKF0DxMmGHx:APA91bH9Fr4GpAkTYyJgH29t3TWTig2E8Mq6w7WsjsaQtM03q5rs4oAc8lWmnsT0VQVQLsli-74phkO_chrdBjB8QXjHZoNXi0WWsqTkj0aY48y7MJMEAs3dBKBO6vhVX49Lsovc3DW_",
-        "notification": {
-          "title": "New Message",
-          "body": 'ge[0].data',
-          "image": "https://mcubd.netlify.app/logoimg/noti.png",
-          "mutable_content": true,
-          "sound": "Tri-tone"
-        },
 
-      }
-      )
-    };
-
-    fetch('https://fcm.googleapis.com/fcm/send', options)
-      .then(response => {
-        res.send('response' + response.toString())
-      }).catch(e => { res.send('eror' + e) })
+  let b= await mlts_collec.updateMany({name:'down_mv_count'}, { $set: { data: JSON.stringify(ar3) ,date:new Date().toLocaleDateString() } });
 
 
 
 
-  }
-
-
-  res.send(ar3)
+  res.send(ar3 +'--- '+ JSON.stringify(b))
 })
+
+
 
 
 
