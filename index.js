@@ -217,7 +217,7 @@ app.post('/push_token', async (req, res) => {
 
   let doc = await mlts_collec.findOne({name:"push_token"})
   let olddata= JSON.parse(doc.data) 
-  let fullar=[...olddata,...req.body]
+  let fullar=[...olddata,req.body]
   console.log(fullar)
 
  
