@@ -29,19 +29,10 @@ var collec = new mongoose.model('za', schema)
 var chat_schema = new mongoose.Schema({ data: String, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String,fname:String })
 var chat_collec = new mongoose.model('chat_data', chat_schema)
 
-var multis_schema = new mongoose.Schema({ data: String, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String,fname:String })
+var multis_schema = new mongoose.Schema({ data: String, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String,fname:String,name:String })
 var mlts_collec = new mongoose.model('multis', multis_schema)
 
  
-// async function aa(){
-//   let db = await mongoose.connection.db;
-//   var t= await db.collection('multi').rename('multis');
-// console.log(t) 
-// };
-// setTimeout(() => {
-  
-//   aa()
-// }, 6000);
 
 var __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -222,11 +213,20 @@ app.get('/not', async (req, res) => {
 
 })
 
-app.post('/push_token', async (req, res) => {
+app.get('/push_token', async (req, res) => {
+  let body='l'
+  let doc = await mlts_collec.findOne({name:"push_token"})
+  // let o= JSON.stringify(doc.data)
+  let olddata= JSON.parse(doc.data) 
+  let fullar=[...olddata,...body]
+  console.log(fullar)
 
-  // var b= await mlts_collec.updateMany({name:'push_token'}, { $set: { links: JSON.stringify( await bgfind3()) ,date:new Date().toLocaleDateString() } });
+ 
 
-  res.send(req.body)
+  var b= await mlts_collec.updateMany({name:'push_token'}, { $set: { data: JSON.stringify(fullar) ,date:new Date().toLocaleDateString() } });
+
+
+  res.send('b')
 })
 
 
@@ -327,38 +327,6 @@ app.post('/ram', async (req, res) => {
 
 app.get('/downmv', async (req, res) => {
 
-  // const response = await fetch('https://mcubd.netlify.app/mcubd.json');
-  // const body = await response.text()
-  // const statuss = await response.status
-
-  // if (statuss == 200) {
-  //   let json = JSON.parse(body)
-
-  //   let arr = []
-
-  //   json.mcubd.forEach(item => {
-  //     arr.push(fetch(item).then((res) => { return { status: res.status, url: item, section: 'MCU' } }))
-  //   });
-
-  //   json.seris.forEach(item => {
-  //     arr.push(fetch(item).then((res) => { return { status: res.status, url: item, section: 'Seris' } }))
-  //   });
-
-  //   json.fox.forEach(item => {
-  //     arr.push(fetch(item).then((res) => { return { status: res.status, url: item, section: 'Fox' } }))
-  //   });
-
-  //   json.others.forEach(item => {
-  //     arr.push(fetch(item).then((res) => { return { status: res.status, url: item, section: 'Others' } }))
-  //   });
-
-  //   Promise.all(arr).then((data) => { res.send(data) })
-
-
-
-
-
-  // } else { res.send('mcubd.json status not 200') }
   let resp= await mlts_collec.findOne({name:'mcubd_links'})
   let str=JSON.stringify(resp)
   let json=JSON.parse(str)
