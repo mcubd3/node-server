@@ -225,7 +225,7 @@ app.post('/push_token', async (req, res) => {
   var b= await mlts_collec.updateMany({name:'push_token'}, { $set: { data: JSON.stringify(fullar) ,date:new Date().toLocaleDateString() } });
 
 
-  res.send('b')
+  res.send(b)
 })
 
 
