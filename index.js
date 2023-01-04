@@ -321,8 +321,9 @@ app.get('/not', async (req, res) => {
 app.post('/push_token', async (req, res) => {
 
   let doc = await mlts_collec.findOne({name:"push_token"})
-  let olddata= JSON.parse(doc.data) 
-  let fullar=[...olddata,req.body]
+  let olddata= JSON.parse(doc.data)
+  let fullar=[...new Set([...olddata,req.body])]  
+  // let fullar=[...olddata,req.body]
   console.log(fullar)
   var b= await mlts_collec.updateMany({name:'push_token'}, { $set: { data: JSON.stringify(fullar) ,date:new Date().toLocaleDateString() } });
   res.send(b)
