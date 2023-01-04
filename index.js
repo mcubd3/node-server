@@ -367,7 +367,7 @@ app.get('/cheak_down_links', async (req, res) => {
   console.log(ar3)
  
 
-  let b= await mlts_collec.updateMany({name:'down_mv_count'}, { $set: { data: JSON.stringify(ar3) ,date:new Date().toLocaleDateString() } });
+  let b= await mlts_collec.updateMany({name:'down_mv_count'}, { $set: { data: JSON.stringify(ar3) ,date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY') } });
 
 
 
@@ -375,14 +375,7 @@ app.get('/cheak_down_links', async (req, res) => {
   res.send(ar3 +'--- '+ JSON.stringify(b))
 })
 
-async function a(){
-  let resp= await mlts_collec.findOne({name:'mcubd_links'})
-  let str=JSON.stringify(resp)
-  let json=JSON.parse(str)
-  let links=json.links
-  console.log(links)
 
-};a()
 
 
 
