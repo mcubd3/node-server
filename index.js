@@ -12,7 +12,7 @@ import fetch from 'node-fetch';
 import multer from 'multer'
 import path from 'path'
 import {fileTypeFromStream} from 'file-type';
-import e from 'express';
+
 
 
 
@@ -329,7 +329,7 @@ app.post('/push_token', async (req, res) => {
 })
 
 
-app.get('/downlinks', async (req, res) => {
+app.get('/cheak_down_links', async (req, res) => {
 
   let resp= await mlts_collec.findOne({name:'mcubd_links'})
   let str=JSON.stringify(resp)
@@ -375,7 +375,14 @@ app.get('/downlinks', async (req, res) => {
   res.send(ar3 +'--- '+ JSON.stringify(b))
 })
 
+async function a(){
+  let resp= await mlts_collec.findOne({name:'mcubd_links'})
+  let str=JSON.stringify(resp)
+  let json=JSON.parse(str)
+  let links=json.links
+  console.log(links)
 
+};a()
 
 
 
