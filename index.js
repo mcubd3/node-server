@@ -325,7 +325,7 @@ app.post('/push_token', async (req, res) => {
   let fullar=[...new Set([...olddata,req.body])]  
   // let fullar=[...olddata,req.body]
   console.log(fullar)
-  var b= await mlts_collec.updateMany({name:'push_token'}, { $set: { data: JSON.stringify(fullar) ,date:new Date().toLocaleDateString() } });
+  var b= await mlts_collec.updateMany({name:'push_token'}, { $set: { data: JSON.stringify(fullar) ,date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY') } });
   res.send(b)
 })
 
