@@ -173,72 +173,7 @@ app.get('/chatdatanoti', async (req, res) => {
 
 })
 
-app.get('/not', async (req, res) => {
 
-  let doc1 = await mlts_collec.findOne({name:"down_mv_count"})
-  let doc1d=JSON.parse(doc1.data)
-
-    let doc = await mlts_collec.findOne({name:"push_token"})
-    let push_tokenar= JSON.parse(doc.data) 
-
-
-    if(doc1d.length != 1){
-      let arr=[]
-      push_tokenar.forEach(i => {
-
-        const options = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-            'Authorization': 'key=AAAAh3rwJYY:APA91bG6BNcz-ommMEQEl7NdfGU3HtdoqBfBnPyPsNvb45q2rxuhFPnPAddXStJ4QuoKY2G0ygT_rzngv809hSkpT11rkCyHy_npJoHxzTca-GJZqpfltFQydL3U3St0KbfbfrcrjRH6'
-          },
-          body: JSON.stringify({
-            "to": i,
-            "notification": {
-              "title": "g drive movie 404",
-              // "body": 'g drive movie 404',
-              // "image": "https://mcubd.netlify.app/logoimg/noti.png",
-              "mutable_content": true,
-              "sound": "Tri-tone"
-            },
-          }
-          )
-        };
-
-        // fetch('https://fcm.googleapis.com/fcm/send', options)
-        // .then(async (d) => {
-        //  console.log(await d.text())
-        // })
-        // .catch((e) => {
-        //  console.log(e)
-        // })
-        
-        arr.push(fetch('https://fcm.googleapis.com/fcm/send', options).then((res) => { return { status: res.status} }))
-
-
-      });
-      let resu=  await Promise.all(arr)
-      res.send(resu)
-
-
-    }else{
-      res.send('not not send cuz 0 link down')
-
-    }
-    
-    
-
-})
-
-app.post('/push_token', async (req, res) => {
-
-  let doc = await mlts_collec.findOne({name:"push_token"})
-  let olddata= JSON.parse(doc.data) 
-  let fullar=[...olddata,req.body]
-  console.log(fullar)
-  var b= await mlts_collec.updateMany({name:'push_token'}, { $set: { data: JSON.stringify(fullar) ,date:new Date().toLocaleDateString() } });
-  res.send(b)
-})
 
 
 
@@ -333,10 +268,68 @@ app.post('/ram', async (req, res) => {
 
 })
 
+app.get('/not', async (req, res) => {
+
+  let doc1 = await mlts_collec.findOne({name:"down_mv_count"})
+  let doc1d=JSON.parse(doc1.data)
+
+    let doc = await mlts_collec.findOne({name:"push_token"})
+    let push_tokenar= JSON.parse(doc.data) 
 
 
+    if(doc1d.length != 1){
+      let arr=[]
+      push_tokenar.forEach(i => {
 
-app.get('/downmv', async (req, res) => {
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Authorization': 'key=AAAAh3rwJYY:APA91bG6BNcz-ommMEQEl7NdfGU3HtdoqBfBnPyPsNvb45q2rxuhFPnPAddXStJ4QuoKY2G0ygT_rzngv809hSkpT11rkCyHy_npJoHxzTca-GJZqpfltFQydL3U3St0KbfbfrcrjRH6'
+          },
+          body: JSON.stringify({
+            "to": i,
+            "notification": {
+              "title": "g drive movie 404",
+              // "body": 'g drive movie 404',
+              // "image": "https://mcubd.netlify.app/logoimg/noti.png",
+              "mutable_content": true,
+              "sound": "Tri-tone"
+            },
+          }
+          )
+        };
+
+
+        arr.push(fetch('https://fcm.googleapis.com/fcm/send', options).then((res) => { return { status: res.status} }))
+
+
+      });
+      let resu=  await Promise.all(arr)
+      res.send(resu)
+
+
+    }else{
+      res.send('not not send cuz 0 link down')
+
+    }
+    
+    
+
+})
+
+app.post('/push_token', async (req, res) => {
+
+  let doc = await mlts_collec.findOne({name:"push_token"})
+  let olddata= JSON.parse(doc.data) 
+  let fullar=[...olddata,req.body]
+  console.log(fullar)
+  var b= await mlts_collec.updateMany({name:'push_token'}, { $set: { data: JSON.stringify(fullar) ,date:new Date().toLocaleDateString() } });
+  res.send(b)
+})
+
+
+app.get('/downlinks', async (req, res) => {
 
   let resp= await mlts_collec.findOne({name:'mcubd_links'})
   let str=JSON.stringify(resp)
