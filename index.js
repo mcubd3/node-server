@@ -30,7 +30,7 @@ var collec = new mongoose.model('za', schema)
 var chat_schema = new mongoose.Schema({ data: String, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String,fname:String })
 var chat_collec = new mongoose.model('chat_data', chat_schema)
 
-var multis_schema = new mongoose.Schema({ data: String, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String,fname:String,name:String })
+var multis_schema = new mongoose.Schema({ data: Array, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String,fname:String,name:String })
 var mlts_collec = new mongoose.model('multis', multis_schema)
 
  
@@ -318,15 +318,83 @@ app.get('/not', async (req, res) => {
 
 })
 
+app.get('/chatnot', async (req, res) => {
+
+    let doc = await mlts_collec.findOne({name:"push_token"})
+    // let push_tokenar= JSON.parse(doc.data) 
+    console.log(doc)
+res.send('gg')
+    return 'kk'
+
+
+    
+      let arr=[]
+      push_tokenar.forEach(i => {
+
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Authorization': 'key=AAAAh3rwJYY:APA91bG6BNcz-ommMEQEl7NdfGU3HtdoqBfBnPyPsNvb45q2rxuhFPnPAddXStJ4QuoKY2G0ygT_rzngv809hSkpT11rkCyHy_npJoHxzTca-GJZqpfltFQydL3U3St0KbfbfrcrjRH6'
+          },
+          body: JSON.stringify({
+            "to": i,
+            "notification": {
+              "title": "g drive movie 404",
+              // "body": 'g drive movie 404',
+              // "image": "https://mcubd.netlify.app/logoimg/noti.png",
+              "mutable_content": true,
+              "sound": "Tri-tone"
+            },
+          }
+          )
+        };
+
+
+        arr.push(fetch('https://fcm.googleapis.com/fcm/send', options).then((res) => { return { status: res.status} }))
+
+
+      });
+      let resu=  await Promise.all(arr)
+      res.send(resu)
+
+
+    //   const options = {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json;charset=UTF-8',
+    //       'Authorization': 'key=AAAAh3rwJYY:APA91bG6BNcz-ommMEQEl7NdfGU3HtdoqBfBnPyPsNvb45q2rxuhFPnPAddXStJ4QuoKY2G0ygT_rzngv809hSkpT11rkCyHy_npJoHxzTca-GJZqpfltFQydL3U3St0KbfbfrcrjRH6'
+    //     },
+    //     body: JSON.stringify({
+    //       "to": i,
+    //       "notification": {
+    //         "title": req.query.param || 'mcubd chat',
+    //         // "body": 'g drive movie 404',
+    //         // "image": "https://mcubd.netlify.app/logoimg/noti.png",
+    //         "mutable_content": true,
+    //         "sound": "Tri-tone"
+    //       },
+    //     }
+    //     )
+    //   };
+
+    //  let fcmres= await fetch('https://fcm.googleapis.com/fcm/send', options)
+    //   console.log(fcmres)
+    //   res.send(fcmres)
+    
+    
+
+})
+
 app.post('/push_token', async (req, res) => {
 
   let doc = await mlts_collec.findOne({name:"push_token"})
-  let olddata= JSON.parse(doc.data)
-  let fullar=[...new Set([...olddata,req.body])]  
+  // let olddata= JSON.parse(doc.data)
+  let fullar=[...new Set([...doc.data,req.body])]  
   // let fullar=[...olddata,req.body]
   console.log(fullar)
-  var b= await mlts_collec.updateMany({name:'push_token'}, { $set: { data: JSON.stringify(fullar) ,date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY') } });
-  res.send(b)
+  // var b= await mlts_collec.updateMany({name:'push_token'}, { $set: { data: JSON.stringify(fullar) ,date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY') } });
+  res.send(fullar)
 })
 
 
@@ -370,13 +438,10 @@ app.get('/cheak_down_links', async (req, res) => {
 
   let b= await mlts_collec.updateMany({name:'down_mv_count'}, { $set: { data: JSON.stringify(ar3) ,date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY') } });
 
-
-
-
-  res.send(ar3 +'--- '+ JSON.stringify(b))
+  // res.send(ar3 +'--- '+ JSON.stringify(b))
 })
 
-
+ 
 
 
 
