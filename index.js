@@ -318,18 +318,12 @@ app.get('/not', async (req, res) => {
 
 })
 
-app.get('/chatnot', async (req, res) => {
+app.post('/chatnot', async (req, res) => {
 
     let doc = await mlts_collec.findOne({name:"push_token"})
-    // let push_tokenar= JSON.parse(doc.data) 
-    console.log(doc)
-res.send('gg')
-    return 'kk'
-
-
-    
       let arr=[]
-      push_tokenar.forEach(i => {
+      doc.data.forEach(i => {
+
 
         const options = {
           method: 'POST',
@@ -340,7 +334,7 @@ res.send('gg')
           body: JSON.stringify({
             "to": i,
             "notification": {
-              "title": "g drive movie 404",
+              "title":  req.body || 'mcubd chat',
               // "body": 'g drive movie 404',
               // "image": "https://mcubd.netlify.app/logoimg/noti.png",
               "mutable_content": true,
@@ -351,47 +345,20 @@ res.send('gg')
         };
 
 
-        arr.push(fetch('https://fcm.googleapis.com/fcm/send', options).then((res) => { return { status: res.status} }))
+        arr.push(fetch('https://fcm.googleapis.com/fcm/send', options).then((res) => { return res.status }))
 
 
       });
       let resu=  await Promise.all(arr)
-      res.send(resu)
+      res.send([...new Set([...resu])])
 
-
-    //   const options = {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json;charset=UTF-8',
-    //       'Authorization': 'key=AAAAh3rwJYY:APA91bG6BNcz-ommMEQEl7NdfGU3HtdoqBfBnPyPsNvb45q2rxuhFPnPAddXStJ4QuoKY2G0ygT_rzngv809hSkpT11rkCyHy_npJoHxzTca-GJZqpfltFQydL3U3St0KbfbfrcrjRH6'
-    //     },
-    //     body: JSON.stringify({
-    //       "to": i,
-    //       "notification": {
-    //         "title": req.query.param || 'mcubd chat',
-    //         // "body": 'g drive movie 404',
-    //         // "image": "https://mcubd.netlify.app/logoimg/noti.png",
-    //         "mutable_content": true,
-    //         "sound": "Tri-tone"
-    //       },
-    //     }
-    //     )
-    //   };
-
-    //  let fcmres= await fetch('https://fcm.googleapis.com/fcm/send', options)
-    //   console.log(fcmres)
-    //   res.send(fcmres)
-    
     
 
 })
 
 app.post('/push_token', async (req, res) => {
-
   let doc = await mlts_collec.findOne({name:"push_token"})
-  // let olddata= JSON.parse(doc.data)
   let fullar=[...new Set([...doc.data,req.body])]  
-  // let fullar=[...olddata,req.body]
   console.log(fullar)
   var b= await mlts_collec.updateMany({name:'push_token'}, { $set: { data:fullar ,date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY') } });
   res.send(b)
