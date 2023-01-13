@@ -375,6 +375,7 @@ app.get('/cheak_down_links', async (req, res) => {
   let arr=JSON.parse(links)
   arr=[...arr[0],...arr[1],...arr[2]]
 
+
   let ar2 = []
 
   arr.forEach(i => {
@@ -402,10 +403,13 @@ app.get('/cheak_down_links', async (req, res) => {
 
   console.log(ar3)
  
+  
 
-  let b= await mlts_collec.updateMany({name:'down_mv_count'}, { $set: { data: JSON.stringify(ar3) ,date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY') } });
+  let b= await mlts_collec.updateMany({name:'down_mv_count'}, { $set: { data: ar3 ,date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY') } });
 
-  // res.send(ar3 +'--- '+ JSON.stringify(b))
+  // let b= await mlts_collec.updateMany({name:'down_mv_count'}, { $set: { data:['h','g'] ,date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY') } });
+
+  res.send(ar3 +'--- '+ JSON.stringify(b))
 })
 
  
