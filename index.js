@@ -271,10 +271,10 @@ app.post('/ram', async (req, res) => {
 app.get('/not', async (req, res) => {
 
   let doc1 = await mlts_collec.findOne({name:"down_mv_count"})
-  let doc1d=JSON.parse(doc1.data)
+  let doc1d=doc1.data 
 
     let doc = await mlts_collec.findOne({name:"push_token"})
-    let push_tokenar= JSON.parse(doc.data) 
+    let push_tokenar=doc.data
 
 
     if(doc1d.length != 1){
