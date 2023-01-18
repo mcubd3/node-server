@@ -318,6 +318,12 @@ app.get('/not', async (req, res) => {
 
 })
 
+app.get('/z',async (req,res) => {
+  let b= await mlts_collec.updateMany({name:'test'}, { $set: {device:JSON.stringify(req.headers),date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY') } });
+  res.send('jj')
+ 
+})
+
 app.post('/chatnot', async (req, res) => {
 
     let doc = await mlts_collec.findOne({name:"push_token"})
