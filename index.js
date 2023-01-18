@@ -412,6 +412,12 @@ app.get('/cheak_down_links', async (req, res) => {
   res.send(ar3 +'--- '+ JSON.stringify(b))
 })
 
+app.get('/timeout',(req,res) => {
+  setTimeout(() => {
+    res.send('eeee')
+  }, 100000);
+ 
+})
  
 
 
