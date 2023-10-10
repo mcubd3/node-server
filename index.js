@@ -12,6 +12,7 @@ import multer from 'multer'
 import path from 'path'
 import {fileTypeFromStream} from 'file-type';
 
+import request from 'request'
 
 
 
@@ -462,4 +463,6 @@ try{
 }catch(e){ console.log('eror'+e);res.send(e) }  
 }) 
 
-
+app.get('/goo',async (req,res)=>{
+  res.send("*7*7")
+})
