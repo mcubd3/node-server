@@ -12,7 +12,8 @@ import multer from 'multer'
 import path from 'path'
 import {fileTypeFromStream} from 'file-type';
 
-import request from 'request'
+import got from 'got';
+
 
 
 
@@ -464,5 +465,7 @@ try{
 }) 
 
 app.get('/goo',async (req,res)=>{
-  res.send("*7*7")
+  const html = await got.get('https://drive.google.com/uc?export=download&id=1PEkrNN4T2ZoqwDrpMU9Oeq8Go8AytqLw').text();
+res.send(html)
+  
 })
