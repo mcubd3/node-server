@@ -466,6 +466,8 @@ try{
 
 app.get('/goo',async (req,res)=>{
   const html = await got.get('https://drive.google.com/uc?export=download&id=1PEkrNN4T2ZoqwDrpMU9Oeq8Go8AytqLw').text();
-res.send(html)
+const regex = /(?<=action="\b)(.*?)(?=")/g;
+const result = html.match(regex);
+  res.send(result[0])
   
 })
