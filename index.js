@@ -13,7 +13,7 @@ import path from 'path'
 import {fileTypeFromStream} from 'file-type';
 
 import got from 'got';
-const fbdl = require("fbdl-core");
+//const fbdl = require("fbdl-core");
 
 
 
