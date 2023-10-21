@@ -79,7 +79,7 @@ app.get('/', async (req, res) => {
 
 app.get('/up/:value', async (req,res)=>{
 
-  res.send(req.query.value)
+  res.send(req.params.value)
 })
 
 
