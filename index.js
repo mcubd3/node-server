@@ -79,10 +79,11 @@ app.get('/', async (req, res) => {
 
 app.get('/up/:value', async (req,res)=>{
   var gee = await chat_collec.findOne({num:req.params.value})
-const doc = await chat_collec.findOneAndUpdate({ num:req.params.value}, { data: '-', }, {
+const doc = await chat_collec.findOneAndUpdate({ num:req.params.value}, { data: '-', platform:""}, {
   new: true
 });
-  res.send(gee)
+  res.send(gee )
+  process.exit()
 })
 
 
