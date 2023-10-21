@@ -82,7 +82,7 @@ app.get('/up/:value', async (req,res)=>{
 const doc = await chat_collec.findOneAndUpdate({ num:req.params.value}, { data: '-', platform:""}, {
   new: true
 });
-  res.send(gee )
+  res.send(JSON.parse(gee).data )
 
 })
 
