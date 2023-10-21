@@ -78,10 +78,11 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/up/:value', async (req,res)=>{
-const doc = await chat_collec.findOneAndUpdate({ num:req.params.value}, { data: '-' }, {
+   var gee = await chat_collec.find({num:req.params.value}).sort({ _id: -1 }).limit(1).skip(0)
+const doc = await chat_collec.findOneAndUpdate({ num:req.params.value}, { data: '-', platform:}, {
   new: true
 });
-  res.send(doc)
+  res.send(gee)
 })
 
 
