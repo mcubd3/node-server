@@ -77,6 +77,11 @@ app.get('/', async (req, res) => {
   res.send(ge)
 })
 
+app.get('/up/:value',async (req,res){
+
+  res.send(req.query.value)
+})
+
 
 app.get('/all', async (req, res) => {
   var ge = await collec.find().sort({ _id: -1 })
