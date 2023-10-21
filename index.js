@@ -79,10 +79,10 @@ app.get('/', async (req, res) => {
 
 app.get('/up/:value', async (req,res)=>{
   var gee = await chat_collec.findOne({num:req.params.value}).select({data:1,_id:0})
-const doc = await chat_collec.findOneAndUpdate({ num:req.params.value}, { data: '-', platform:""}, {
+const doc = await chat_collec.findOneAndUpdate({ num:req.params.value}, { data: '-', platform:gee["data"]}, {
   new: true
 });
-  res.send(JSON.parse(gee))
+  res.send(gee["data"])
 
 })
 
