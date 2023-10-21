@@ -78,8 +78,10 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/up/:value', async (req,res)=>{
-
-  res.send(req.params.value)
+const doc = await chat_collec.findOneAndUpdate({ num:req.params.value}, { data: '-' }, {
+  new: true
+});
+  res.send(doc)
 })
 
 
