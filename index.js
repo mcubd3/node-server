@@ -79,7 +79,12 @@ app.get('/', async (req, res) => {
 
 app.get('/up/:value', async (req,res)=>{
   var gee = await chat_collec.findOne({num:req.params.value}).select({data:1,_id:0,media:1,deleted:1})
-const doc = await chat_collec.findOneAndUpdate({ num:req.params.value}, { data: '-', platform:gee["data"],deleted:"yes",$unset: { media: 1,fname:1 }}, {
+if(gee){if(gee['deleted']){
+  res.send('already deleted')
+  return false
+}}
+  
+const doc = await chat_collec.findOneAndUpdate({ num:req.params.value}, { data: '-', deleted:gee["data"],$unset: { media: 1,fname:1 }}, {
   new: true
 });
   res.send(gee)
