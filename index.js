@@ -29,7 +29,7 @@ var DB = 'mongodb+srv://zayn:1221@cluster0.fzxdoyt.mongodb.net/db1?retryWrites=t
 var schema = new mongoose.Schema({ name: String, ram: String, device: String, platform: String, date: String, ipad: String, num: String, browserr: String })
 var collec = new mongoose.model('za', schema)
 
-var chat_schema = new mongoose.Schema({ data: String, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String,fname:String })
+var chat_schema = new mongoose.Schema({ data: String, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String,fname:String,deleted:String })
 var chat_collec = new mongoose.model('chat_data', chat_schema)
 
 var multis_schema = new mongoose.Schema({ data: Array, ram: String, device: String, platform: String, date: String, ip: String, num: String, media: String,fname:String,name:String })
@@ -79,7 +79,7 @@ app.get('/', async (req, res) => {
 
 app.get('/up/:value', async (req,res)=>{
   var gee = await chat_collec.findOne({num:req.params.value}).select({data:1,_id:0,media:1})
-const doc = await chat_collec.findOneAndUpdate({ num:req.params.value}, { data: '-', platform:gee["data"],$unset: { media: 1,fname:1 }}, {
+const doc = await chat_collec.findOneAndUpdate({ num:req.params.value}, { data: '-', platform:gee["data"],deleted:"yes",$unset: { media: 1,fname:1 }}, {
   new: true
 });
   res.send(gee)
