@@ -79,8 +79,8 @@ app.post('/sms', async (req, res) => {
  
   	var urll="http://bulksmsbd.net/api/smsapi?api_key=uk0KnxYS1HSuilRi7CfB&type=text&number="+JSON.parse(req.body)['num']+"&senderid=8809617613445&message="+JSON.parse(req.body)['msg'];
      var fdata= await fetch('https://google.com')
-     data = await fdata.text(); let status=await fdata.status; 
-  res.send(`${urll} _____${status}------${data}`)
+    var data = await fdata.text(); let status=await fdata.status; 
+  res.send(`${urll} _____${ await status}------${await data}`)
   
   
 })
