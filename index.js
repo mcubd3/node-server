@@ -81,7 +81,7 @@ app.post('/sms', async (req, res) => {
      //var fdata= await fetch()
     //var data = await fdata.text(); let status=await fdata.status; 
  // res.send(`_____${ await status}_-_-_-_-_-_-_${await data}`)
-  res.send(req.body+JSON.parse(req.body))
+  res.send(req.body+typeof(JSON.parse(req.body)))
   
 })
 
