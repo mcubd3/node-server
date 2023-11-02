@@ -75,7 +75,7 @@ app.get('/exit', async (req, res) => {
 })
 
 app.post('/sms', async (req, res) => {
-  res.send('gej')
+  res.send(req.body)
   
 })
 
