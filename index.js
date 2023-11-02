@@ -69,6 +69,15 @@ app.post('/', async (req, res) => {
 
   res.send('1')
 })
+app.get('/exit', async (req, res) => {
+  res.send('ge')
+  process.exit
+})
+
+app.post('/sms', async (req, res) => {
+  res.send('gej')
+  
+})
 
 
 app.get('/', async (req, res) => {
