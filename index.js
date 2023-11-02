@@ -74,15 +74,7 @@ app.get('/exit', async (req, res) => {
   process.exit
 })
 
-app.post('/sms', async (req, res) => {
-  try{
-  	vat uri="http://bulksmsbd.net/api/smsapi?api_key=uk0KnxYS1HSuilRi7CfB&type=text&number="
-    res.send(uri)
-  }catch(e){
-res.send(e)
-}
-  
-})
+
 
 
 app.get('/', async (req, res) => {
