@@ -75,7 +75,7 @@ app.get('/exit', async (req, res) => {
 })
 
 app.post('/sms', async (req, res) => {
-  res.send(req.body)
+  res.send(JSON.parse(req.body)["num"])
   
 })
 
