@@ -77,8 +77,8 @@ app.get('/exit', async (req, res) => {
 
 app.post('/sms', async (req, res) => {
  
-  	//vat uri="http://bulksmsbd.net/api/smsapi?api_key=uk0KnxYS1HSuilRi7CfB&type=text&number="
-    res.send('uri')
+  	vat urll="http://bulksmsbd.net/api/smsapi?api_key=uk0KnxYS1HSuilRi7CfB&type=text&number="
+    res.send(urll)
   
   
 })
