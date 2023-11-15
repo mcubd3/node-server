@@ -144,7 +144,7 @@ app.post('/chatdata', async (req, res) => {
 
 app.post('/chatdatahis', async (req, res) => {
   // var ge = await chat_collec.find({ num: req.body - 1 }).limit(1).skip(0)
-  var ge = await chat_collec.find({ num:{$in: [req.body-1,req.body-2,req.body-3,req.body-4,req.body-5,req.body-6,req.body-7,req.body-8,req.body-9,req.body-10,req.body-11,req.body-12,req.body-13,req.body-14,req.body-15,req.body-16,req.body-17,req.body-18,req.body-19,req.body-20]} },{_id:0,ram:0,device:0,platform:0,__v:0}).sort({_id:-1})
+  var ge = await chat_collec.find({ num:{$in: [req.body-1,req.body-2,req.body-3,req.body-4,req.body-5,req.body-6,req.body-7,req.body-8,req.body-9,req.body-10,req.body-11,req.body-12,req.body-13,req.body-14,req.body-15,req.body-16,req.body-17,req.body-18,req.body-19,req.body-20,req.body-21,req.body-22,req.body-23,req.body-24,req.body-25,req.body-26,req.body-27,req.body-28,req.body-29,req.body-30,req.body-31,req.body-32,req.body-33,req.body-34,req.body-35,req.body-36,req.body-37,req.body-38,req.body-39,req.body-40]} },{_id:0,ram:0,device:0,platform:0,__v:0}).sort({_id:-1})
   res.send(ge)
 })
 
