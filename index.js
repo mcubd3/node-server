@@ -95,6 +95,28 @@ app.get('/', async (req, res) => {
   res.send(ge)
 })
 
+
+
+app.get('/time/:userId', async (req, res) => {
+  const userId = req.params.userId;
+  console.log()
+  if(userId=='sec'){
+    res.send(moment().tz('Asia/dhaka').format('h:m:s a,D/M/YY'))
+  }else if(userId=='msec'){
+    res.send(moment().tz('Asia/dhaka').format('h:m:ss:SSS a,D/M/YY'))
+  }else{
+    res.send(moment().tz('Asia/dhaka').format('h:m a,D/M/YY'))
+  }
+})
+
+
+
+
+
+
+
+
+
 app.get('/up/:value', async (req,res)=>{
   var gee = await chat_collec.findOne({num:req.params.value}).select({data:1,_id:0,media:1,deleted:1})
 if(gee){if(gee['deleted']){
