@@ -105,11 +105,18 @@ app.get('/time/:userId', async (req, res) => {
   res.set('Ip', clientIP);
 
   if(userId=='sec'){
-    res.send(moment().tz('Asia/dhaka').format('h:m:s a,D/M/YY'))
+    // res.send()
+    res.json({"ip":clientIP,"date":moment().tz('Asia/dhaka').format('h:m:s a,D/M/YY')})
   }else if(userId=='msec'){
-    res.send(moment().tz('Asia/dhaka').format('h:m:ss:SSS a,D/M/YY'))
+    // res.send()
+    res.json({"ip":clientIP,"date":moment().tz('Asia/dhaka').format('h:m:ss:SSS a,D/M/YY')})
+
+
   }else{
-    res.send(moment().tz('Asia/dhaka').format('h:m a,D/M/YY'))
+    // res.send(moment().tz('Asia/dhaka').format('h:m a,D/M/YY'))
+    res.json({"ip":clientIP,"date":moment().tz('Asia/dhaka').format('h:m a,D/M/YY')})
+
+
   }
 })
 
