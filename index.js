@@ -134,12 +134,11 @@ app.get('/time/:userId', async (req, res) => {
 })
 
 
-app.post('/firestore_write',async(req,res)=>{
+app.post('/firestore_write',async(req,res)=>{let lastdoc;var newnum;
     const chat =collection(firestore,'chat')
     const q = query(chat, orderBy("num", "desc"), limit(1));
     const querySnapshot = await getDocs(q);
-    const lastdoc=querySnapshot.docs[0].data().num
-    const newnum= await parseInt(lastdoc)+1
+    if(querySnapshot.docs.length=='0'){newnum= '0'}else{lastdoc=querySnapshot.docs[0].data().num;newnum= await parseInt(lastdoc)+1}
     const clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const z= await setDoc(doc(firestore, "chat",String(newnum)), {
       data: JSON.parse( req.body).data,
