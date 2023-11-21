@@ -100,6 +100,10 @@ app.get('/', async (req, res) => {
 app.get('/time/:userId', async (req, res) => {
   const userId = req.params.userId;
   console.log()
+  const clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+  res.set('ip', clientIP);
+
   if(userId=='sec'){
     res.send(moment().tz('Asia/dhaka').format('h:m:s a,D/M/YY'))
   }else if(userId=='msec'){
