@@ -121,6 +121,13 @@ app.get('/time/:userId', async (req, res) => {
 })
 
 
+app.post('/firestore_write',async(req,res)=>{
+
+console.log(JSON.parse( req.body).data)
+res.send(JSON.parse( req.body).data)
+})
+
+
 
 
 
