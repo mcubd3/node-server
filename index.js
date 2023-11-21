@@ -140,9 +140,9 @@ app.post('/firestore_write',async(req,res)=>{let lastdoc;var newnum;
     const querySnapshot = await getDocs(q);
     if(querySnapshot.docs.length=='0'){newnum= '0'}else{lastdoc=querySnapshot.docs[0].data().num;newnum= await parseInt(lastdoc)+1}
     const clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    const z= await setDoc(doc(firestore, "chat",String(newnum)), {
+    const z= await setDoc(doc(firestore, "chat",String(newnum)), { 
       data: JSON.parse( req.body).data,
-      media:JSON.parse( req.body).media,
+      media:JSON.parse( req.body).media, 
       fname:JSON.parse( req.body).fname,
       // deleted:JSON.parse( req.body).data,
       date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY'),
