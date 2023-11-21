@@ -11,6 +11,8 @@ import fetch from 'node-fetch';
 import multer from 'multer'
 import path from 'path'
 import {fileTypeFromStream} from 'file-type';
+import { initializeApp } from "firebase/app";
+import { getFirestore,collection ,query, orderBy, limit,getDocs , doc, setDoc} from "firebase/firestore";
 
 import got from 'got';
 //const fbdl = require("fbdl-core");
@@ -20,8 +22,19 @@ import got from 'got';
 
 
 
+const firebaseConfig = {
+  apiKey: "AIzaSyBzaFL1XOU-_152duOo0baL1DfgVVuSwMI",
+  authDomain: "test2-5bbd8.firebaseapp.com",
+  databaseURL: "https://test2-5bbd8-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "test2-5bbd8",
+  storageBucket: "test2-5bbd8.appspot.com",
+  messagingSenderId: "683307239625",
+  appId: "1:683307239625:web:d28ed1c2fb6b31dd4e6518"
+};
 
-
+// Initialize Firebase
+const appp = initializeApp(firebaseConfig);
+const firestore = getFirestore(appp);
 
 
 var DB = 'mongodb+srv://zayn:1221@cluster0.fzxdoyt.mongodb.net/db1?retryWrites=true&w=majority'; mongoose.connect(DB)
@@ -122,8 +135,19 @@ app.get('/time/:userId', async (req, res) => {
 
 
 app.post('/firestore_write',async(req,res)=>{
+    const chat =collection(firestore,'chat')
+    const q = query(chat, orderBy("num", "desc"), limit(1));
+    const querySnapshot = await getDocs(q);
+    const lastdoc=querySnapshot.docs[0].data().num
+    const newnum= await parseInt(lastdoc)+1
+    const clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const z= await setDoc(doc(firestore, "chat",String(newnum)), {
+      data: JSON.parse( req.body).data,
+      date:moment().tz('Asia/dhaka').format('h:m a,D/M/YY'),
+      ip:clientIP,
+      num:newnum
+    });
 
-console.log(JSON.parse( req.body).data)
 res.send(JSON.parse( req.body).data)
 })
 
