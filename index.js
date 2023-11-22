@@ -102,7 +102,7 @@ const ampm = hours >= 12 ? 'PM' : 'AM';
 const formattedHours = hours % 12 || 12;
 // console.log( (await client.getMessages('@SHADHINA'))[0].message)
 console.log( `${formattedHours}:${minutes}:${seconds}:${ampm}` )
-return `${formattedHours}:${minutes}:${seconds}:${ampm}`
+return `${hours}:${minutes}:${seconds}:${ampm}`
 // console.log( (await client.getMessages('driveseed_tg_bot'))[2])
  
 
