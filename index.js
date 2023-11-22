@@ -14,6 +14,9 @@ import {fileTypeFromStream} from 'file-type';
 import { initializeApp } from "firebase/app";
 import { getFirestore,collection ,query, orderBy, limit,getDocs , doc, setDoc} from "firebase/firestore";
 
+import { TelegramClient } from 'telegram';
+import { StringSession } from 'telegram/sessions';
+
 import got from 'got';
 //const fbdl = require("fbdl-core");
 
@@ -67,6 +70,48 @@ app.use(bodyParser.text({ type: "*/*", limit: '50mb' }));
 
 httpServer.listen(process.env.PORT || 8000);
 
+
+
+const apiId = 28863345; 
+const apiHash = "0dae6aefb121ac09f5c2d07f09493452";
+const stringSession = new StringSession("1BQANOTEuMTA4LjU2LjEwNgG7ZgnLQyvRjqR7Mn0WhQFswQcpZPq7WEFwvN+wNRyt0AtBaSmcrgJOseJUMdscbVD3aC/kqyuzr9wpErEf6WnYQf/HuQ0pgUZf23x1s3rfB096hGSpFfx9m429I1YxmAJUydrlnHiTNCBlRsHAQDRiRNzS+X5ml/c2duEmn/dtcXJJk9Bt/GTXHnZZhr8ZANz9h7bwgqcaT9WtlII+JBXhj8uG2GEA5SxH7kVindm0uRzjaIIylGONFcuZDUUC7s5Yozk/Czm3pOR6JfpZaQAk3+/+Aw3wRloRBtRVIF6Mbian2Sf0NZg/727+Zc4aHknOcPNXlxjELcfuU16v12DmDg=="); // fill this later with the value from session.save()
+
+var tmsg=async () => {
+  console.log("Loading interactive example...");
+  const client = new TelegramClient(stringSession, apiId, apiHash, {
+    connectionRetries: 5,
+  });
+  await client.start({
+    phoneNumber: async () => await input.text("Please enter your number: "),
+    password: async () => await input.text("Please enter your password: "),
+    phoneCode: async () =>
+      await input.text("Please enter the code you received: "),
+    onError: (err) => console.log(err),
+  });
+  console.log("You should now be connected.");
+  console.log(client.session.save()); // Save this string to avoid logging in again
+//   await client.sendMessage("me", { message: "Hello!" }); 
+// console.log( (await client.getMessages('driveseed_tg_bot'))[0])
+let time=(await client.getMessages('@SHADHINA'))[0].date
+let timee=time*1000
+let dateObject=new Date(timee)
+const hours = dateObject.getHours();
+const minutes = dateObject.getMinutes();
+const seconds = dateObject.getSeconds();
+const ampm = hours >= 12 ? 'PM' : 'AM';
+const formattedHours = hours % 12 || 12;
+// console.log( (await client.getMessages('@SHADHINA'))[0].message)
+console.log( `${formattedHours}:${minutes}:${seconds}:${ampm}` )
+return `${formattedHours}:${minutes}:${seconds}:${ampm}`
+// console.log( (await client.getMessages('driveseed_tg_bot'))[2])
+ 
+
+}
+
+
+app.get('/tmsg', async (req, res) => {
+  res.send(await tmsg())
+})
 
 
 
