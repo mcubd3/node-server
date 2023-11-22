@@ -15,7 +15,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore,collection ,query, orderBy, limit,getDocs , doc, setDoc} from "firebase/firestore";
 
 import { TelegramClient } from 'telegram';
-import { StringSession } from 'telegram/sessions';
+import { StringSession } from 'telegram/sessions/index.js';
 
 import got from 'got';
 //const fbdl = require("fbdl-core");
